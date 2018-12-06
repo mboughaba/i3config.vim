@@ -125,10 +125,15 @@ syn match ClientColor /^\s*client.\w\+\s\+.*$/ contains=ClientColorKeyword,Color
 syn match InterprocessKeyword /ipc-socket/ contained
 syn match Interprocess /^\s*ipc-socket\s\+.*$/ contains=InterprocessKeyword
 
-" Focus follows mouse
+" Mouse warping
 syn keyword MouseWarpingKeyword mouse_warping contained
 syn keyword MouseWarpingType output none contained
 syn match MouseWarping /^\s*mouse_warping\s\+\(output\|none\)\s\?$/ contains=MouseWarpingKeyword,MouseWarpingType
+
+" Focus follows mouse
+syn keyword FocusFollowsMouseKeyword focus_follows_mouse contained
+syn keyword FocusFollowsMouseType yes no contained
+syn match FocusFollowsMouse /^\s*focus_follows_mouse\s\+\(yes\|no\)\s\?$/ contains=FocusFollowsMouseKeyword,FocusFollowsMouseType
 
 " Popups during fullscreen mode
 syn keyword PopupOnFullscreenKeyword popup_during_fullscreen contained
@@ -178,6 +183,7 @@ hi! def link FocusOnActivationType Type
 hi! def link PopupOnFullscreenType Type
 hi! def link OrientationKeyword Type
 hi! def link MouseWarpingType Type
+hi! def link FocusFollowsMouseType Type
 hi! def link GapStyleKeyword Type
 hi! def link LayoutKeyword Type
 hi! def link BorderStyleKeyword Type
@@ -221,6 +227,7 @@ hi! def link WorkspaceKeyword Identifier
 hi! def link ClientColorKeyword Identifier
 hi! def link InterprocessKeyword Identifier
 hi! def link MouseWarpingKeyword Identifier
+hi! def link FocusFollowsMouseKeyword Identifier
 hi! def link PopupOnFullscreenKeyword Identifier
 hi! def link FocusWrappingKeyword Identifier
 hi! def link ForceXineramaKeyword Identifier
