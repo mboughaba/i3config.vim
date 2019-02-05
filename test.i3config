@@ -72,6 +72,7 @@ default_floating_border pixel 1
 
 # 11) Hide border edge
 hide_edge_borders both
+hide_edge_borders smart_no_gaps
 
 # 11) Arbitrary command for specific window
 for_window [class="XTerm"] floating enable
@@ -203,3 +204,12 @@ focus_follows_mouse yes
 # 31) Mouse wrapping
 mouse_warping none
 mouse_warping output
+
+# 32) smart_gaps
+smart_gaps on
+smart_gaps inverse_outer
+
+# 33) smart_borders
+smart_borders on
+smart_borders no_gaps
+
