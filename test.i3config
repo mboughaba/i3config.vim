@@ -197,6 +197,37 @@ gaps outer all minus 24
 gaps inner all set 0
 gaps horizontal current plus 40
 gaps outer current toggle 60
+gaps inner $var
+gaps outer $var
+gaps left $var
+gaps top $var
+gaps right $var
+gaps top $var
+gaps inner set $var
+gaps inner plus $var
+gaps inner minus $var
+gaps outer set $var
+gaps outer plus $var
+gaps outer minus $var
+gaps inner current $var
+gaps inner current set $var
+gaps inner current plus $var
+gaps inner current minus $var
+gaps inner all $var
+gaps inner all set $var
+gaps inner all plus $var
+gaps inner all minus $var
+gaps outer current $var
+gaps outer current set $var
+gaps outer current plus $var
+gaps outer current minus $var
+gaps outer all $var
+gaps outer all set $var
+gaps outer all plus $var
+gaps outer all minus $var
+gaps inner all set $var
+gaps horizontal current plus $var
+gaps outer current toggle $var
 
 # change focus
 bindsym Mod1+h focus left
