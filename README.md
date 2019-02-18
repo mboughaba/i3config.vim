@@ -48,6 +48,12 @@ or
 :set filetype=i3config
 ```
 
+or you can add this line your .vimrc file
+
+```vim
+autocmd BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+```vim
+
 ## Installation instructions
 
 Follow one of the steps below and reload vim afterwards.
