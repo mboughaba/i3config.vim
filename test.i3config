@@ -168,6 +168,7 @@ set_from_resource $black i3wm.color0 #000000
 # 29) gaps
 gaps inner 1
 gaps outer 2
+gaps outer -1
 gaps left 2
 gaps top 2
 gaps right 2
