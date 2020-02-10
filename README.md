@@ -58,6 +58,7 @@ aug i3config_ft_detection
   au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
 aug end
 ```
+Additonally, you an add `# vim: filetype=i3config` anywhere in your config file, as suggested by the original plugin (see below).
 
 ## Installation instructions
 
@@ -65,13 +66,25 @@ Follow one of the steps below and reload vim afterwards.
 
 ### Vundle
 
-Install using [vundle](https://github.com/gmarik/Vundle.vim) by adding
+Install using [Vundle](https://github.com/gmarik/Vundle.vim) by adding
 
 ```vim
 Plugin 'mboughaba/i3config.vim'
 ```
 
-to .vimrc and run `:PluginInstall`.
+to `.vimrc` and run `:PluginInstall`.
+
+### vim-plug
+
+Install using [vim-plug](https://github.com/junegunn/vim-plug). Similar than the installation for Vundle, just change `Plugin` to `Plug`:
+
+Add
+
+```vim
+Plug 'mboughaba/i3config.vim'
+```
+
+to `.vimrc` and run `:PlugInstall`.
 
 > I use Vundle myself, the two steps below may not be fully correct,
 you need to change them to fit your needs.
