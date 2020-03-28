@@ -44,6 +44,9 @@ bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+
 bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym $mod+u border none
+bindsym $mod+y border pixel $def_border_pix
+
 
 # 6) Floating
 floating_modifier $mod
@@ -68,6 +71,7 @@ new_float normal
 new_float pixel 1
 new_float normal 2
 default_border pixel 1
+default_border pixel $def_border_pix
 default_floating_border pixel 1
 
 # 11) Hide border edge
