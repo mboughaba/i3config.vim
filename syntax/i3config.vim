@@ -183,6 +183,10 @@ syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword
 " Line continuation
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^.*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigFocusWrappingType,i3ConfigColor,i3ConfigVariable transparent keepend extend
 
+" Include sway config file
+syn keyword swayConfigInclude include contained
+syn match swayConfigFile /^include\s\(\~\/.*$\|\/.*$\|\.\{1,2}\/.*$\)/ contains=swayInclude
+
 " Define the highlighting.
 hi! def link i3ConfigError                           Error
 hi! def link i3ConfigTodo                            Todo
@@ -255,5 +259,7 @@ hi! def link i3ConfigDrawingMarksKeyword             Identifier
 hi! def link i3ConfigBlockKeyword                    Identifier
 hi! def link i3ConfigVariable                        Statement
 hi! def link i3ConfigArbitraryCommand                Type
+hi! def link swayConfigInclude                       Identifier
+hi! def link swayConfigFile                          Constant
 
 let b:current_syntax = "i3config"
