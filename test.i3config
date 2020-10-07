@@ -15,6 +15,8 @@ new_float normall
 hade_edge_borders both
 exec_ chromium
 mouse_wraping none
+include config_file
+include .../config_file
 
 # 2) COMMENT
 # This is a comment
@@ -273,3 +275,9 @@ smart_borders no_gaps
 title_align left
 title_align right
 title_align center
+
+# 36) sway config file include
+include ~/.config/sway/config
+include /.config/sway/config
+include ./sway/config
+include ../sway/config
