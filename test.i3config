@@ -15,6 +15,8 @@ new_float normall
 hade_edge_borders both
 exec_ chromium
 mouse_wraping none
+include config_file
+include .../config_file
 
 # 2) COMMENT
 # This is a comment
@@ -50,6 +52,7 @@ bindsym $mod+y border pixel $def_border_pix
 
 # 6) Floating
 floating_modifier $mod
+floating_modifier $mod normal
 floating_minimum_size 75 x 50
 floating_maximum_size -1 x -1
 
@@ -273,3 +276,14 @@ smart_borders no_gaps
 title_align left
 title_align right
 title_align center
+
+# 36) sway config file include
+include ~/.config/sway/config
+include /.config/sway/config
+include ./sway/config
+include ../sway/config
+
+# 36) sway focus and output keywords
+focus output eDP-1
+output DP-2 pos 0 0
+output eDP-1 pos 1440 0
