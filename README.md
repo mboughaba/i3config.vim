@@ -5,16 +5,12 @@ Compared to the vim standard *conf* syntax highlighting, i3config
 adds highlighting of all keywords,
 types and options as defined in the i3 configuration manual.
 
-I built this based on the current specification
-provided (as of Sat 12 Mar 2016) in:
-
+Visit for the latest specification:
 <http://i3wm.org/docs/userguide.html#configuring>
 
-![](i3config.vim.gif)
+![](i3ConfigExample.png)
 
-*using vim color scheme [dracula](https://github.com/dracula/vim)*
-
-*using Powerline font [ProFont for Powerline](https://github.com/powerline/fonts/blob/master/ProFont/README.rst)*
+*using my color scheme - in dotfiles*
 
 ## Features
 
@@ -27,52 +23,17 @@ make a pull request to cover the case.
 
 ### File type detection
 
-There is no specific extension for i3 config file.
-For auto detection, the recommended method is to rename your file to something like:
-
-+ .i3.config
-+ i3.config
-+ something.i3config
-+ something.i3.config
+Nowadays we usually use *i3/config, therefore the filetype is used in
+connection with such path. But for convenience anything as *i3*config is recognized.
 
 > This way you can keep your file clean somewhere in a
 dotfile repository and have it symlinked to ~/.i3/config
 
-If you don't want to, then you can always do:
-
-```vim
-:set ft=i3config
-```
-
-or
-
-```vim
-:set filetype=i3config
-```
-
-or you can add this line your .vimrc file
-
-```vim
-aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
-aug end
-```
 Additonally, you an add `# vim: filetype=i3config` anywhere in your config file, as suggested by the original plugin (see below).
 
 ## Installation instructions
 
 Follow one of the steps below and reload vim afterwards.
-
-### Vundle
-
-Install using [Vundle](https://github.com/gmarik/Vundle.vim) by adding
-
-```vim
-Plugin 'mboughaba/i3config.vim'
-```
-
-to `.vimrc` and run `:PluginInstall`.
 
 ### vim-plug
 
@@ -81,31 +42,24 @@ Install using [vim-plug](https://github.com/junegunn/vim-plug). Similar than the
 Add
 
 ```vim
-Plug 'mboughaba/i3config.vim'
+Plug 'JosefLitos/nvim-i3config'
 ```
 
 to `.vimrc` and run `:PlugInstall`.
 
-> I use Vundle myself, the two steps below may not be fully correct,
-you need to change them to fit your needs.
+### packer-nvim
 
-### Git submodule + Pathogen
-
-If you have [pathogen](https://github.com/tpope/vim-pathogen) installed,
-and you prefer to use git submodules, run
-
-```sh
-cd ~/.vim
-git submodule add https://github.com/mboughaba/i3config.vim.git bundle/syntax/
+```lua
+use 'JosefLitos/nvim-i3config'
 ```
 
 ### Manual installation
 
-If you don't have either Vundle or Pathogen installed, copy both i3config.vim file
+Copy both i3config.vim file
 to .vim/after/syntax and .vim/after/ftdetect respectively.
 
 ```sh
-git clone https://github.com/mboughaba/i3config.git /tmp/i3config.vim
+git clone https://github.com/JosefLitos/nvim-i3config.git /tmp/i3config.vim
 mkdir -p ~/.vim/after/syntax/
 mv /tmp/i3config.vim/after/syntax/i3config.vim ~/.vim/after/syntax/i3config.vim
 rm -rf /tmp/i3config.vim
@@ -133,9 +87,9 @@ Make sure to add a line to cover your test in the *test.i3config*.
 
 ### Author
 
-Mohamed Boughaba
+JosefLitos, forked from Mohamed Boughaba
 
-Development is done at: <https://github.com/mboughaba/i3config.vim>
+Development is done at: <https://github.com/JosefLitos/nvim-i3config>
 
 ## License
 
