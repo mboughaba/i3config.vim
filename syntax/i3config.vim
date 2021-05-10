@@ -199,6 +199,7 @@ hi! def link i3ConfigNumber Number
 hi! def link i3ConfigBoolean Boolean
 hi! def link i3ConfigColor Constant
 hi! def link i3ConfigVariableModifier Operator
+hi! def link i3ConfigVariable Variable
 hi! def link i3ConfigSetKeyword Keyword
 hi! def link i3ConfigGapStyleKeyword Type
 hi! def link i3ConfigGapStyle Function
