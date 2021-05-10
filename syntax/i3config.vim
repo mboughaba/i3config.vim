@@ -62,13 +62,13 @@ syn match i3ConfigSmartBorder /^\s*smart_borders\s\+\(on\|no_gaps\)\s\?$/ contai
 
 " Keyboard bindings
 syn keyword i3ConfigAction move exec exit restart reload layout append_layout workspace focus kill open fullscreen sticky split floating mark unmark resize rename scratchpad swap mode bar gaps border contained
-syn keyword i3ConfigOption enable disable toggle key shrink grow height width restore container to left right up down position absolute relative output window splitv splith tabbed stacked default on off inner outer current all set plus minus top bottom horizontal vertical auto none normal pixel prev next back_and_forth contained
+syn keyword i3ConfigOption enable disable toggle mode_toggle key shrink grow height width restore container to left right up down position absolute relative output window splitv splith tabbed stacked default on off inner outer current all set plus minus top bottom horizontal vertical auto none normal pixel prev next back_and_forth contained
 syn match i3ConfigNumber /\s-\?\d\+/ contained
 syn match i3ConfigUnit /\sp\(pt\|x\)/ contained
 syn match i3ConfigUnitOr /\sor/ contained
 syn match i3ConfigModifier /\w\++\w\+\(\(+\w\+\)\+\)\?/ contained contains=i3ConfigVariableModifier
 syn keyword i3ConfigBindKeyword bindsym bindcode contained
-syn match i3ConfigBindArgument /--\w\+\(\(-\w\+\)\+\)\?\s/ contained
+syn match i3ConfigBindArgument /\(--no-startup-id\|--release\|--border\|--whole-window\|--exclude-titlebar\)/ contained
 syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigNumber,i3ConfigBindKeyword,i3ConfigVariable,i3ConfigVariableAndModifier,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
 
 " Floating
@@ -212,7 +212,7 @@ hi! def link i3ConfigOption Type
 hi! def link i3ConfigUnit Number
 hi! def link i3ConfigUnitOr Operator
 hi! def link i3ConfigBindKeyword Keyword
-hi! def link i3ConfigBindArgument Special
+hi! def link i3ConfigBindArgument i3ConfigNoStartupId
 hi! def link i3ConfigSizeSpecial Operator
 " hi! def link i3ConfigSize Number
 hi! def link i3ConfigFloating Keyword
@@ -233,7 +233,7 @@ hi! def link i3ConfigAssignSpecial Type
 hi! def link i3ConfigResourceKeyword Keyword
 hi! def link i3ConfigExecKeyword Function
 hi! def link i3ConfigExecAlwaysKeyword Keyword
-hi! def link i3ConfigNoStartupId Special
+hi! def link i3ConfigNoStartupId Constant
 hi! def link i3ConfigWorkspaceKeyword Function
 hi! def link i3ConfigOutput Type
 hi! def link i3ConfigClientColorKeyword Keyword
