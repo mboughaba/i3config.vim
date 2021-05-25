@@ -179,7 +179,7 @@ syn match i3ConfigShowMarks /^\s*show_marks\s\+\(yes\|no\)\s\?$/ contains=i3Conf
 
 " Group mode/bar
 syn keyword i3ConfigBlockKeyword mode bar height colors i3bar_command status_command position exec mode hidden_state modifier id position output background statusline tray_output tray_padding separator separator_symbol workspace_buttons strip_workspace_numbers binding_mode_indicator focused_workspace active_workspace inactive_workspace urgent_workspace binding_mode contained
-syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable transparent keepend extend
+syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable transparent keepend extend
 
 " Line continuation
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^.*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable transparent keepend extend
