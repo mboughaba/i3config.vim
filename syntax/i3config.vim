@@ -72,9 +72,12 @@ syn match i3ConfigBindArgument /\(--no-startup-id\|--release\|--border\|--whole-
 syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigNumber,i3ConfigBindKeyword,i3ConfigVariable,i3ConfigVariableAndModifier,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
 
 " Floating
+syn keyword swayConfigFloatingModifier floating_modifier contained
+syn match swayConfigFloatingMouseAction /^\s\?.*floating_modifier\s.*\(normal\|inverted\)$/ contains=swayConfigFloatingModifier,i3ConfigVariable,i3ConfigSize
+
 syn keyword i3ConfigSizeSpecial x contained
 syn match i3ConfigSize / -\?\d\+\s\?x\s\?-\?\d\+/ contained contains=i3ConfigSizeSpecial,i3ConfigNumber
-syn match i3ConfigFloating /^\s*floating_modifier\s\+\$\w\+\d\?/ contains=i3ConfigVariable
+syn match i3ConfigFloating /^\s*floating_modifier\s\+\$\w\+\d\?/ contains=i3ConfigVariable,i3ConfigSize,swayConfigFloatingMouseAction
 syn match i3ConfigFloating /^\s*floating_\(maximum\|minimum\)_size\s\+-\?\d\+\s\?x\s\?-\?\d\+/ contains=i3ConfigSize
 
 " Orientation
@@ -125,6 +128,14 @@ syn keyword i3ConfigOutput output contained
 syn match i3ConfigWorkspace /^\s*workspace\s\+.*$/ contains=i3ConfigWorkspaceKeyword,i3ConfigNumber,i3ConfigString,i3ConfigOutput,i3ConfigVariable
 
 syn keyword i3ConfigBoolean yes no contained
+
+" set display outputs
+syn match swayConfigOutput /^\s*output\s\+.*$/ contains=i3ConfigOutput
+
+" set display focus
+syn keyword swayConfigFocusKeyword focus contained
+syn keyword swayConfigFocusType output contained
+syn match swayConfigFocus /^\s*focus\soutput\s.*$/ contains=swayConfigFocusKeyword,swayConfigFocusType
 
 " Changing colors
 syn keyword i3ConfigClientColorKeyword client focused focused_inactive unfocused urgent placeholder background contained
@@ -183,6 +194,10 @@ syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword
 
 " Line continuation
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^.*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable transparent keepend extend
+
+" Includes with relative paths to config files
+syn keyword swayConfigInclude include contained
+syn match swayConfigFile /^include\s\(\~\?\/.*$\|\.\{0,2}\/.*$\)/ contains=swayConfigInclude
 
 " Define the highlighting.
 hi! def link i3ConfigError                           Error
@@ -254,5 +269,11 @@ hi! def link i3ConfigFocusOnActivationKeyword        Keyword
 hi! def link i3ConfigFocusOnActivationType           Normal
 hi! def link i3ConfigShowMarksKeyword                Keyword
 hi! def link i3ConfigBlockKeyword                    Keyword
+hi! def link swayConfigInclude                         Identifier
+hi! def link swayConfigFile                            Constant
+hi! def link swayConfigFloatingModifier                Identifier
+hi! def link swayConfigFloatingMouseAction             Type
+hi! def link swayConfigFocusKeyword                    Type
+hi! def link swayConfigFocusType                       Identifier
 
 let b:current_syntax = "i3config"
