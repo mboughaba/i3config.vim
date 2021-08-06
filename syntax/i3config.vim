@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language: i3 config file
 " Maintainer: Mohamed Boughaba <mohamed dot bgb at gmail dot com>
-" Version: 0.4
-" Last Change: 2019-03-23 21:54
+" Version: 4.19
+" Last Change: 2021-6-8 19:30
 
 " References:
 " http://i3wm.org/docs/userguide.html#configuring
@@ -185,75 +185,74 @@ syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^.*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable transparent keepend extend
 
 " Define the highlighting.
-hi! def link i3ConfigError Error
-hi! def link i3ConfigTodo Todo
-hi! def link i3ConfigComment Comment
-hi! def link i3ConfigOperator Operator
-hi! def link i3ConfigParen Delimiter
-hi! def link i3ConfigFontKeyword Keyword
-hi! def link i3ConfigFontNamespace Type
-hi! def link i3ConfigFontContent Normal
-hi! def link i3ConfigFontSize Number
-hi! def link i3ConfigString String
-hi! def link i3ConfigNumber Number
-hi! def link i3ConfigBoolean Boolean
-hi! def link i3ConfigColor Constant
-hi! def link i3ConfigVariableModifier Operator
-hi! def link i3ConfigVariable Variable
-hi! def link i3ConfigSetKeyword Keyword
-hi! def link i3ConfigGapStyleKeyword Type
-hi! def link i3ConfigGapStyle Function
-hi! def link i3ConfigSmartGapKeyword Normal
-hi! def link i3ConfigSmartGap Keyword
-hi! def link i3ConfigSmartBorderKeyword Normal
-hi! def link i3ConfigSmartBorder Keyword
-hi! def link i3ConfigAction Function
-hi! def link i3ConfigOption Type
-hi! def link i3ConfigUnit Number
-hi! def link i3ConfigUnitOr Operator
-hi! def link i3ConfigBindKeyword Keyword
-hi! def link i3ConfigBindArgument i3ConfigNoStartupId
-hi! def link i3ConfigSizeSpecial Operator
-" hi! def link i3ConfigSize Number
-hi! def link i3ConfigFloating Keyword
-hi! def link i3ConfigOrientationKeyword Normal
-hi! def link i3ConfigOrientation Keyword
-hi! def link i3ConfigLayoutKeyword Normal
-hi! def link i3ConfigLayout Keyword
-hi! def link i3ConfigBorderStyleKeyword Normal
-hi! def link i3ConfigBorderStyle Keyword
-hi! def link i3ConfigEdgeKeyword Normal
-hi! def link i3ConfigEdge Keyword
-hi! def link i3ConfigCommandKeyword Keyword
-hi! def link i3ConfigConditionalText Normal
-hi! def link i3ConfigConditional Delimiter
-hi! def link i3ConfigNoFocusKeyword Keyword
-hi! def link i3ConfigAssignKeyword Keyword
-hi! def link i3ConfigAssignSpecial Type
-hi! def link i3ConfigResourceKeyword Keyword
-hi! def link i3ConfigExecKeyword Function
-hi! def link i3ConfigExecAlwaysKeyword Keyword
-hi! def link i3ConfigNoStartupId Constant
-hi! def link i3ConfigWorkspaceKeyword Function
-hi! def link i3ConfigOutput Type
-hi! def link i3ConfigClientColorKeyword Keyword
-hi! def link i3ConfigClientColor Operator
-hi! def link i3ConfigTitleAlignKeyword Normal
-hi! def link i3ConfigTitleAlign Keyword
-hi! def link i3ConfigInterprocessKeyword Keyword
-hi! def link i3ConfigMouseWarpingKeyword Keyword
-hi! def link i3ConfigMouseWarpingType Normal
-hi! def link i3ConfigFocusFollowsMouseKeyword Keyword
-hi! def link i3ConfigPopupOnFullscreenKeyword Keyword
-hi! def link i3ConfigPopupOnFullscreenType Normal
-hi! def link i3ConfigFocusWrappingKeyword Keyword
-hi! def link i3ConfigForceXineramaKeyword Keyword
-hi! def link i3ConfigAutomaticSwitchKeyword Keyword
-hi! def link i3ConfigTimeUnit Number
-hi! def link i3ConfigDelayUrgencyKeyword Keyword
-hi! def link i3ConfigFocusOnActivationKeyword Keyword
-hi! def link i3ConfigFocusOnActivationType Normal
-hi! def link i3ConfigShowMarksKeyword Keyword
-hi! def link i3ConfigBlockKeyword Keyword
+hi! def link i3ConfigError                           Error
+hi! def link i3ConfigTodo                            Todo
+hi! def link i3ConfigComment                         Comment
+hi! def link i3ConfigOperator                        Operator
+hi! def link i3ConfigParen                           Delimiter
+hi! def link i3ConfigFontKeyword                     Keyword
+hi! def link i3ConfigFontNamespace                   Type
+hi! def link i3ConfigFontContent                     Normal
+hi! def link i3ConfigFontSize                        Number
+hi! def link i3ConfigString                          String
+hi! def link i3ConfigNumber                          Number
+hi! def link i3ConfigBoolean                         Boolean
+hi! def link i3ConfigColor                           Constant
+hi! def link i3ConfigVariableModifier                Operator
+hi! def link i3ConfigVariable                        Variable
+hi! def link i3ConfigSetKeyword                      Keyword
+hi! def link i3ConfigGapStyleKeyword                 Type
+hi! def link i3ConfigGapStyle                        Function
+hi! def link i3ConfigSmartGapKeyword                 Normal
+hi! def link i3ConfigSmartGap                        Keyword
+hi! def link i3ConfigSmartBorderKeyword              Normal
+hi! def link i3ConfigSmartBorder                     Keyword
+hi! def link i3ConfigAction                          Function
+hi! def link i3ConfigOption                          Type
+hi! def link i3ConfigUnit                            Number
+hi! def link i3ConfigUnitOr                          Operator
+hi! def link i3ConfigBindKeyword                     Keyword
+hi! def link i3ConfigBindArgument                    i3ConfigNoStartupId
+hi! def link i3ConfigSizeSpecial                     Operator
+hi! def link i3ConfigFloating                        Keyword
+hi! def link i3ConfigOrientationKeyword              Normal
+hi! def link i3ConfigOrientation                     Keyword
+hi! def link i3ConfigLayoutKeyword                   Normal
+hi! def link i3ConfigLayout                          Keyword
+hi! def link i3ConfigBorderStyleKeyword              Normal
+hi! def link i3ConfigBorderStyle                     Keyword
+hi! def link i3ConfigEdgeKeyword                     Normal
+hi! def link i3ConfigEdge                            Keyword
+hi! def link i3ConfigCommandKeyword                  Keyword
+hi! def link i3ConfigConditionalText                 Normal
+hi! def link i3ConfigConditional                     Delimiter
+hi! def link i3ConfigNoFocusKeyword                  Keyword
+hi! def link i3ConfigAssignKeyword                   Keyword
+hi! def link i3ConfigAssignSpecial                   Type
+hi! def link i3ConfigResourceKeyword                 Keyword
+hi! def link i3ConfigExecKeyword                     Function
+hi! def link i3ConfigExecAlwaysKeyword               Keyword
+hi! def link i3ConfigNoStartupId                     Constant
+hi! def link i3ConfigWorkspaceKeyword                Function
+hi! def link i3ConfigOutput                          Type
+hi! def link i3ConfigClientColorKeyword              Keyword
+hi! def link i3ConfigClientColor                     Operator
+hi! def link i3ConfigTitleAlignKeyword               Normal
+hi! def link i3ConfigTitleAlign                      Keyword
+hi! def link i3ConfigInterprocessKeyword             Keyword
+hi! def link i3ConfigMouseWarpingKeyword             Keyword
+hi! def link i3ConfigMouseWarpingType                Normal
+hi! def link i3ConfigFocusFollowsMouseKeyword        Keyword
+hi! def link i3ConfigPopupOnFullscreenKeyword        Keyword
+hi! def link i3ConfigPopupOnFullscreenType           Normal
+hi! def link i3ConfigFocusWrappingKeyword            Keyword
+hi! def link i3ConfigForceXineramaKeyword            Keyword
+hi! def link i3ConfigAutomaticSwitchKeyword          Keyword
+hi! def link i3ConfigTimeUnit                        Number
+hi! def link i3ConfigDelayUrgencyKeyword             Keyword
+hi! def link i3ConfigFocusOnActivationKeyword        Keyword
+hi! def link i3ConfigFocusOnActivationType           Normal
+hi! def link i3ConfigShowMarksKeyword                Keyword
+hi! def link i3ConfigBlockKeyword                    Keyword
 
 let b:current_syntax = "i3config"

@@ -42,7 +42,7 @@ Install using [vim-plug](https://github.com/junegunn/vim-plug). Similar than the
 Add
 
 ```vim
-Plug 'JosefLitos/nvim-i3config'
+Plug 'JosefLitos/vim-i3config'
 ```
 
 to `.vimrc` and run `:PlugInstall`.
@@ -50,7 +50,7 @@ to `.vimrc` and run `:PlugInstall`.
 ### packer-nvim
 
 ```lua
-use 'JosefLitos/nvim-i3config'
+use 'JosefLitos/vim-i3config'
 ```
 
 ### Manual installation
@@ -59,7 +59,7 @@ Copy both i3config.vim file
 to .vim/after/syntax and .vim/after/ftdetect respectively.
 
 ```sh
-git clone https://github.com/JosefLitos/nvim-i3config.git /tmp/i3config.vim
+git clone https://github.com/JosefLitos/vim-i3config.git /tmp/i3config.vim
 mkdir -p ~/.vim/after/syntax/
 mv /tmp/i3config.vim/after/syntax/i3config.vim ~/.vim/after/syntax/i3config.vim
 rm -rf /tmp/i3config.vim
@@ -87,9 +87,9 @@ Make sure to add a line to cover your test in the *test.i3config*.
 
 ### Author
 
-JosefLitos, forked from Mohamed Boughaba
+JosefLitos, forked original from Mohamed Boughaba
 
-Development is done at: <https://github.com/JosefLitos/nvim-i3config>
+Development is done at: <https://github.com/JosefLitos/vim-i3config>
 
 ## License
 
