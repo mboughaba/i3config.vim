@@ -15,7 +15,9 @@ if version < 600
   syn clear
 elsei exists("b:current_syntax")
   fini
-en
+en 
+
+autocmd BufRead,BufNewFile *i3/*config setlocal ft=i3config
 
 scriptencoding utf-8
 
