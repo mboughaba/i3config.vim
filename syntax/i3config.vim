@@ -229,7 +229,7 @@ hi! def link i3ConfigOption                          Type
 hi! def link i3ConfigUnit                            Number
 hi! def link i3ConfigUnitOr                          Operator
 hi! def link i3ConfigBindKeyword                     Keyword
-hi! def link i3ConfigBindArgument                    i3ConfigNoStartupId
+hi! def link i3ConfigBindArgument                    Parameter
 hi! def link i3ConfigSizeSpecial                     Operator
 hi! def link i3ConfigFloating                        Keyword
 hi! def link i3ConfigOrientationKeyword              Normal
@@ -249,7 +249,7 @@ hi! def link i3ConfigAssignSpecial                   Type
 hi! def link i3ConfigResourceKeyword                 Keyword
 hi! def link i3ConfigExecKeyword                     Function
 hi! def link i3ConfigExecAlwaysKeyword               Keyword
-hi! def link i3ConfigNoStartupId                     Constant
+hi! def link i3ConfigNoStartupId                     i3ConfigBindArgument
 hi! def link i3ConfigWorkspaceKeyword                Function
 hi! def link i3ConfigOutput                          Type
 hi! def link i3ConfigClientColorKeyword              Keyword
