@@ -1,35 +1,29 @@
 # i3config.vim - vim i3 config syntax highlighting
 
 This file contains the syntax highlighting that I use for i3 config in Vim.
-Compared to the vim standard *conf* syntax highlighting, i3config
+Compared to the vim standard `conf` syntax highlighting, i3config
 adds highlighting of all keywords,
 types and options as defined in the i3 configuration manual.
 
 Visit for the latest specification:
 <http://i3wm.org/docs/userguide.html#configuring>
 
-![](i3ConfigExample.png)
+![screenshot](screenshot.png)
 
-*using my color scheme - in dotfiles*
+used colourscheme: [NerdContrast](https://github.com/JosefLitos/nerdcontrast.nvim)
 
 ## Features
 
-i3config does what a syntax highlighting would do and additionally
-provides some sort of syntax checking. If you end up with *Bold Red*
-lines in your i3 config file this would mean that your syntax is wrong
-or there is an issue in the plugin.
-If that is the case please report the issue and/or
-make a pull request to cover the case.
+- nice and clear syntax highlighting of i3 keywords and operators,
+- wrong syntax will be highlighted as an **error**
+- if something is not an error but wrong highlighting, please report it to this repo
 
 ### File type detection
 
-Nowadays we usually use *i3/config, therefore the filetype is used in
-connection with such path. But for convenience anything as *i3*config is recognized.
+Nowadays we usually use \*i3/config, therefore the filetype is used in
+connection with such path. But for convenience anything as \*i3\*config is recognized.
 
-> This way you can keep your file clean somewhere in a
-dotfile repository and have it symlinked to ~/.i3/config
-
-Additonally, you an add `# vim: filetype=i3config` anywhere in your config file, as suggested by the original plugin (see below).
+Additonally, you can add `# vim: filetype=i3config` anywhere in your config file, as suggested by the original plugin (see below).
 
 ## Installation instructions
 
@@ -47,7 +41,9 @@ Plug 'JosefLitos/vim-i3config'
 
 to `.vimrc` and run `:PlugInstall`.
 
-### packer-nvim
+### packer.nvim
+
+Install [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 use 'JosefLitos/vim-i3config'
@@ -72,24 +68,10 @@ rm -rf /tmp/i3config.vim
 + vim-scripts/edifact.vim
   <https://github.com/vim-scripts/edifact.vim> (For Error highlighting).
 
-### What about PotatoesMaster/i3-vim-syntax
-
-*PotatoesMaster/i3-vim-syntax* was the one I used in the past.
-But as the maintainer himself pointed out,
-there are some issues and a rewrite is needed.
-
 ## Contribution
 
 Feel free to make a pull request, I will integrate it when time permits.
 Make sure to add a line to cover your test in the *test.i3config*.
-
-## Background information
-
-### Author
-
-JosefLitos, forked original from Mohamed Boughaba
-
-Development is done at: <https://github.com/JosefLitos/vim-i3config>
 
 ## License
 

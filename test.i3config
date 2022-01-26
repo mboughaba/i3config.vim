@@ -1,6 +1,6 @@
 # 1) ERROR
-     sdsjdkjsdkO
-    fon t xft : System San Francisco Display,FontAwesome UI
+	 sdsjdkjsdkO
+	fon t xft : System San Francisco Display,FontAwesome UI
 $var.one
 bindsyn --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
 kjdfdjdfkfO
@@ -21,14 +21,14 @@ include .../config_file
 # 2) COMMENT
 # This is a comment
 # TODO: This is a todo comment
-     # This is another comment
+	 # This is another comment
 # 3) FONT
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:DejaVu Sans Mono 10
 font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
 font pango:Terminus 11px
-    #font xft:Cousine, FontAwesome 10
-    font xft:System San Francisco Display, FontAwesome 10
+	#font xft:Cousine, FontAwesome 10
+	font xft:System San Francisco Display, FontAwesome 10
 
 # 5) Variable
 $var-one
@@ -39,7 +39,7 @@ set $m Mod1
 set $focused-bg-color   #404552
 
 # 5) Keybinding
-    bindsym $mod+f fullscreen toggle
+	bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+r restart
 bindcode 214 exec --no-startup-id /home/michael/toggle_beamer.sh
 bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
@@ -148,17 +148,17 @@ show_marks yes
 
 # 26) Group mode/bar
 mode "resize" {
-        # Pressing down will grow the window’s height.
-        bindsym l resize shrink width 10 px or 10 ppt
+	# Pressing down will grow the window’s height.
+	bindsym l resize shrink width 10 px or 10 ppt
 }
 bar {
-    status_command /home/mohamed/.conkyi3
-    position top
-  colors {
-    background $bg_color
-    separator #757575
-    urgent_workspace   $urgent_bg_color   $urgent_bg_color   $text_color
-    }
+	status_command /home/mohamed/.conkyi3
+	position top
+	colors {
+	background $bg_color
+	separator #757575
+	urgent_workspace   $urgent_bg_color   $urgent_bg_color   $text_color
+	}
 }
 
 # 27) Line continuation
