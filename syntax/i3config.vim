@@ -31,28 +31,29 @@ syn keyword i3ConfigTodo TODO FIXME XXX contained
 " Comments are started with a # and can only be used at the beginning of a line
 syn match i3ConfigComment /^\s*#.*$/ contains=i3ConfigTodo
 
+syn match i3ConfigOperator /[,;]/ contained
+
 " Font
 " A FreeType font description is composed by:
 " a font family, a style, a weight, a variant, a stretch and a size.
-syn match i3ConfigOperator /[,.:+;=]/ contained
+syn match i3ConfigFontOperator /[,:]/ contained
 syn match i3ConfigParen /[{}]/ contained
 syn keyword i3ConfigFontKeyword font contained
-syn match i3ConfigFontNamespace /\w\+:/ contained contains=i3ConfigOperator
-syn match i3ConfigFontContent /-\?\w\+\(-\+\|\s\+\|,\)/ contained contains=i3ConfigFontNamespace,i3ConfigFontKeyword,i3ConfigOperator
+syn match i3ConfigFontNamespace /\w\+:/ contained contains=i3ConfigFontOperator
+syn match i3ConfigFontContent /-\?\w\+\(-\+\|\s\+\|,\)/ contained contains=i3ConfigFontNamespace,i3ConfigFontKeyword,i3ConfigFontOperator
 syn match i3ConfigFontSize /\s\=\d\+\(px\)\?\s\?$/ contained
-syn match i3ConfigFont /^\s*font\s\+.*$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace,i3ConfigOperator
-syn match i3ConfigFont /^\s*font\s\+.*\(\\\_.*\)\?$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace,i3ConfigOperator
-syn match i3ConfigFont /^\s*font\s\+.*\(\\\_.*\)\?[^\\]\+$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace,i3ConfigOperator
-syn match i3ConfigFont /^\s*font\s\+\(\(.*\\\_.*\)\|\(.*[^\\]\+$\)\)/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace,i3ConfigOperator
+syn match i3ConfigFont /^\s*font\s\+.*$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace
+syn match i3ConfigFont /^\s*font\s\+.*\(\\\_.*\)\?$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace
+syn match i3ConfigFont /^\s*font\s\+.*\(\\\_.*\)\?[^\\]\+$/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace
+syn match i3ConfigFont /^\s*font\s\+\(\(.*\\\_.*\)\|\(.*[^\\]\+$\)\)/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace
 
 " variables
 syn match i3ConfigString /\(['"]\)\(.\{-}\)\1/ contained
-syn match i3ConfigColor /#\w\{6}/ contained
+syn match i3ConfigColor /#\w\{3,8}/ contained
 syn match i3ConfigVariableModifier /+/ contained
-syn match i3ConfigVariableAndModifier /+\w\+/ contained contains=i3ConfigVariableModifier
-syn match i3ConfigVariable /\$\w\+\(\(-\w\+\)\+\)\?/ contains=i3ConfigVariableModifier,i3ConfigVariableAndModifier
+syn match i3ConfigVariable /\$\w\+/ contained
 syn keyword i3ConfigSetKeyword set contained
-syn match i3ConfigSet /^\s*set\s\+.*$/ contains=i3ConfigVariable,i3ConfigSetKeyword,i3ConfigColor,i3ConfigString,i3ConfigNoStartupId
+syn match i3ConfigSet /^\s*set\s\+.*$/ contains=i3ConfigVariable,i3ConfigSetKeyword,i3ConfigColor,i3ConfigString,i3ConfigNoStartupId,i3ConfigNumber
 
 " Gaps
 syn keyword i3ConfigGapStyleKeyword inner outer horizontal vertical top right bottom left current all set plus minus toggle up down contained
@@ -65,13 +66,13 @@ syn match i3ConfigSmartBorder /^\s*smart_borders\s\+\(on\|no_gaps\)\s\?$/ contai
 " Keyboard bindings
 syn keyword i3ConfigAction move exec exit restart reload layout append_layout workspace focus kill open fullscreen sticky split floating mark unmark resize rename scratchpad swap mode bar gaps border contained
 syn keyword i3ConfigOption enable disable toggle mode_toggle key shrink grow height width restore container to left right up down position absolute relative output window splitv splith tabbed stacked default on off inner outer current all set plus minus top bottom horizontal vertical auto none normal pixel prev next back_and_forth child parent contained
-syn match i3ConfigNumber /\s-\?\d\+/ contained
+syn match i3ConfigNumber /\s\(-\|+\)\?\d\+/ contained
 syn match i3ConfigUnit /\sp\(pt\|x\)/ contained
 syn match i3ConfigUnitOr /\sor/ contained
-syn match i3ConfigModifier /\w\++\w\+\(\(+\w\+\)\+\)\?/ contained contains=i3ConfigVariableModifier
 syn keyword i3ConfigBindKeyword bindsym bindcode contained
 syn match i3ConfigBindArgument /\(--no-startup-id\|--release\|--border\|--whole-window\|--exclude-titlebar\)/ contained
-syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigNumber,i3ConfigBindKeyword,i3ConfigVariable,i3ConfigVariableAndModifier,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
+syn match i3ConfigBindKey /^\s*\(bindsym\|bindcode\)\s\+\(--release\s\+\)\?[^ ]\+/ contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigVariable,i3ConfigVariableModifier,i3ConfigBindArgument
+syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigNumber,i3ConfigBindKey,i3ConfigVariable,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
 
 " Floating
 syn keyword swayConfigFloatingModifier floating_modifier contained
@@ -102,7 +103,8 @@ syn match i3ConfigEdge /^\s*hide_edge_borders\s\+\(none\|vertical\|horizontal\|b
 " Arbitrary commands for specific windows (for_window)
 syn keyword i3ConfigCommandKeyword for_window contained
 syn match i3ConfigConditionalText /\w\+\(-\w\+\)*/ contained
-syn region i3ConfigConditional start="\[" end="\]" contained contains=i3ConfigString,i3ConfigOperator,i3ConfigConditionalText
+syn match i3ConfigEqualsOperator /=/ contained
+syn region i3ConfigConditional start="\[" end="\]" contained contains=i3ConfigString,i3ConfigEqualsOperator,i3ConfigConditionalText
 syn match i3ConfigArbitraryCommand /^\s*for_window\s\+.*$/ contains=i3ConfigConditional,i3ConfigCommandKeyword,i3ConfigAction,i3ConfigOption,i3ConfigSize,i3ConfigNumber,i3ConfigString,i3ConfigOperator
 
 " Disable focus open opening
@@ -122,7 +124,7 @@ syn match i3ConfigResource /^\s*set_from_resource\s\+.*$/ contains=i3ConfigResou
 syn keyword i3ConfigExecKeyword exec contained
 syn keyword i3ConfigExecAlwaysKeyword exec_always contained
 syn match i3ConfigNoStartupId /--no-startup-id/ contained " We are not using i3ConfigBindArgument as only no-startup-id is supported here
-syn match i3ConfigExec /^\s*exec\(_always\)\?\s\+.*$/ contains=i3ConfigExecKeyword,i3ConfigExecAlwaysKeyword,i3ConfigNoStartupId,i3ConfigString,i3ConfigNumber
+syn match i3ConfigExec /^\s*exec\(_always\)\?\s\+.*$/ contains=i3ConfigExecKeyword,i3ConfigExecAlwaysKeyword,i3ConfigNoStartupId,i3ConfigString,i3ConfigNumber,i3ConfigVariable
 
 " Automatically putting workspaces on specific screens
 syn keyword i3ConfigWorkspaceKeyword workspace contained
@@ -192,7 +194,7 @@ syn match i3ConfigShowMarks /^\s*show_marks\s\+\(yes\|no\)\s\?$/ contains=i3Conf
 
 " Group mode/bar
 syn keyword i3ConfigBlockKeyword mode bar height colors i3bar_command status_command position exec mode hidden_state modifier id position output background statusline tray_output tray_padding separator separator_symbol workspace_buttons strip_workspace_numbers binding_mode_indicator focused_workspace active_workspace inactive_workspace urgent_workspace binding_mode contained
-syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable transparent keepend extend
+syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable,i3ConfigVariableModifier transparent keepend extend
 
 " Line continuation
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^.*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable transparent keepend extend
@@ -207,6 +209,7 @@ hi! def link i3ConfigTodo                            Todo
 hi! def link i3ConfigComment                         Comment
 hi! def link i3ConfigOperator                        Operator
 hi! def link i3ConfigParen                           Delimiter
+hi! def link i3ConfigFontOperator                    i3ConfigOperator
 hi! def link i3ConfigFontKeyword                     Keyword
 hi! def link i3ConfigFontNamespace                   Type
 hi! def link i3ConfigFontContent                     Normal
@@ -228,6 +231,7 @@ hi! def link i3ConfigAction                          Function
 hi! def link i3ConfigOption                          Type
 hi! def link i3ConfigUnit                            Number
 hi! def link i3ConfigUnitOr                          Operator
+hi! def link i3ConfigBindKey                         Constant
 hi! def link i3ConfigBindKeyword                     Keyword
 hi! def link i3ConfigBindArgument                    Parameter
 hi! def link i3ConfigSizeSpecial                     Operator
@@ -241,6 +245,7 @@ hi! def link i3ConfigBorderStyle                     Keyword
 hi! def link i3ConfigEdgeKeyword                     Normal
 hi! def link i3ConfigEdge                            Keyword
 hi! def link i3ConfigCommandKeyword                  Keyword
+hi! def link i3ConfigEqualsOperator                  i3ConfigOperator
 hi! def link i3ConfigConditionalText                 Normal
 hi! def link i3ConfigConditional                     Delimiter
 hi! def link i3ConfigNoFocusKeyword                  Keyword
