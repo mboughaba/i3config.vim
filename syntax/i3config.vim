@@ -44,7 +44,8 @@ syn match i3ConfigFont /^\s*font\s\+.*\(\\\_.*\)\?[^\\]\+$/ contains=i3ConfigFon
 syn match i3ConfigFont /^\s*font\s\+\(\(.*\\\_.*\)\|\(.*[^\\]\+$\)\)/ contains=i3ConfigFontContent,i3ConfigFontSize,i3ConfigFontNamespace
 
 " variables
-syn match i3ConfigString /\(['"]\)\(.\{-}\)\1/ contained
+syn match i3ConfigString /['"][^'"]*['"]/ contained
+syn region i3ConfigString start=/['"][^'"]*\\/ end=/['"]/ contained
 syn match i3ConfigColor /#\w\{3,8}/ contained
 syn match i3ConfigVariableModifier /+/ contained
 syn match i3ConfigVariable /\$[A-Z0-9a-z-_]\+/ contained
@@ -75,7 +76,7 @@ syn match i3ConfigUnitOr /\sor/ contained
 syn keyword i3ConfigBindKeyword bindsym bindcode contained
 syn match i3ConfigBindArgument /\(--no-startup-id\|--release\|--border\|--whole-window\|--exclude-titlebar\)/ contained
 syn match i3ConfigBindKey /^\s*\(bindsym\|bindcode\)\s\+\(--release\s\+\)\?[^ ]\+/ contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigVariable,i3ConfigVariableModifier,i3ConfigBindArgument
-syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*$/ contains=i3ConfigNumber,i3ConfigBindKey,i3ConfigVariable,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigGapStyleKeyword,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
+syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*/ contains=i3ConfigNumber,i3ConfigBindKey,i3ConfigVariable,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigGapStyleKeyword,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
 
 " Floating
 syn keyword swayConfigFloatingModifier floating_modifier contained
@@ -200,7 +201,7 @@ syn keyword i3ConfigBlockKeyword mode bar height colors i3bar_command status_com
 syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable,i3ConfigVariableModifier transparent keepend extend
 
 " Line continuation
-syn region i3ConfigLineCont start=/^.*\\$/ end=/^[^\\]*$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable transparent keepend extend
+syn region i3ConfigLineCont start=/^.*\\$/ end=/^$/ end=/[^\\]$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable keepend extend
 
 " Includes with relative paths to config files
 syn keyword swayConfigInclude include contained
