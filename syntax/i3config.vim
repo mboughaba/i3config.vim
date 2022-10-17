@@ -48,9 +48,9 @@ syn match i3ConfigString /['"][^'"]*['"]/ contained
 syn region i3ConfigString start=/['"][^'"]*\\/ end=/['"]/ contained
 syn match i3ConfigColor /#\w\{3,8}/ contained
 syn match i3ConfigVariableModifier /+/ contained
-syn match i3ConfigVariable /\$[A-Z0-9a-z-_]\+/ contained
+syn match i3ConfigVariable /\$[A-Z0-9a-z-_]\+/
 syn keyword i3ConfigSetKeyword set contained
-syn match i3ConfigSet /^\s*set\s\+.*$/ contains=i3ConfigVariable,i3ConfigSetKeyword,i3ConfigColor,i3ConfigString,i3ConfigNoStartupId,i3ConfigNumber
+syn match i3ConfigSet /^\s*set\s\+.*$/ contains=i3ConfigVariable,i3ConfigSetKeyword,i3ConfigColor,i3ConfigString,i3ConfigNoStartupId,i3ConfigNumber,swayConfigOutputCommand
 
 " Include
 syn keyword i3ConfigIncludeKeyword include contained
@@ -69,19 +69,16 @@ syn match i3ConfigSmartBorder /^\s*smart_borders\s\+\(on\|no_gaps\)\s\?$/ contai
 
 " Keyboard bindings
 syn keyword i3ConfigAction move exec exit restart reload layout append_layout workspace focus kill open fullscreen sticky split floating mark unmark resize rename scratchpad swap mode bar gaps border contained
-syn keyword i3ConfigOption enable disable toggle mode_toggle key shrink grow height width restore container to left right up down position absolute relative output window splitv splith tabbed stacked default on off inner outer current all set plus minus top bottom horizontal vertical auto none normal pixel prev next back_and_forth child parent show contained
-syn match i3ConfigNumber /\s\(-\|+\)\?\d\+/ contained
+syn keyword i3ConfigOption enable disable toggle mode_toggle key shrink grow height width restore container to left right up down position absolute relative window splitv splith tabbed stacked default on off inner outer current all set plus minus top bottom horizontal vertical auto none normal pixel prev next back_and_forth child parent show contained
+syn match i3ConfigNumber /\(\s\|x\|,\)\(-\|+\)\?\d\+/ contained
 syn match i3ConfigUnit /\sp\(pt\|x\)/ contained
 syn match i3ConfigUnitOr /\sor/ contained
 syn keyword i3ConfigBindKeyword bindsym bindcode contained
 syn match i3ConfigBindArgument /\(--no-startup-id\|--release\|--border\|--whole-window\|--exclude-titlebar\)/ contained
 syn match i3ConfigBindKey /^\s*\(bindsym\|bindcode\)\s\+\(--release\s\+\)\?[^ ]\+/ contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigVariable,i3ConfigVariableModifier,i3ConfigBindArgument
-syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*/ contains=i3ConfigNumber,i3ConfigBindKey,i3ConfigVariable,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigGapStyleKeyword,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional
+syn match i3ConfigBind /^\s*\(bindsym\|bindcode\)\s\+.*/ contains=i3ConfigNumber,i3ConfigBindKey,i3ConfigVariable,i3ConfigModifier,i3ConfigBindArgument,i3ConfigAction,i3ConfigOption,i3ConfigGapStyleKeyword,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional,swayConfigOutputCommand
 
 " Floating
-syn keyword swayConfigFloatingModifier floating_modifier contained
-syn match swayConfigFloatingMouseAction /^\s\?.*floating_modifier\s.*\(normal\|inverted\)$/ contains=swayConfigFloatingModifier,i3ConfigVariable,i3ConfigSize
-
 syn keyword i3ConfigSizeSpecial x contained
 syn match i3ConfigSize / -\?\d\+\s\?x\s\?-\?\d\+/ contained contains=i3ConfigSizeSpecial,i3ConfigNumber
 syn match i3ConfigFloating /^\s*floating_modifier\s\+\$\w\+\d\?/ contains=i3ConfigVariable,i3ConfigSize,swayConfigFloatingMouseAction
@@ -135,15 +132,7 @@ syn keyword i3ConfigWorkspaceKeyword workspace contained
 syn keyword i3ConfigOutput output contained
 syn match i3ConfigWorkspace /^\s*workspace\s\+.*$/ contains=i3ConfigWorkspaceKeyword,i3ConfigNumber,i3ConfigString,i3ConfigOutput,i3ConfigVariable
 
-syn keyword i3ConfigBoolean yes no contained
-
-" set display outputs
-syn keyword swayConfigOutput output contained
-syn match swayConfigOutputCommand /^\s*output\s\+.*$/ contains=swayConfigOutput,i3ConfigNumber
-
-" set display focus
-syn keyword swayConfigFocusKeyword focus contained
-syn match swayConfigFocus /^\s*focus\soutput\s.*$/ contains=swayConfigFocusKeyword,i3ConfigOutput
+syn keyword i3ConfigBoolean yes no enabled disabled on off true false contained
 
 " Changing colors
 syn keyword i3ConfigClientColorKeyword client focused focused_inactive unfocused urgent placeholder background contained
@@ -197,17 +186,49 @@ syn keyword i3ConfigShowMarksKeyword show_marks contained
 syn match i3ConfigShowMarks /^\s*show_marks\s\+\(yes\|no\)\s\?$/ contains=i3ConfigBoolean,i3ConfigShowMarksKeyword
 
 " Group mode/bar
-syn keyword i3ConfigBlockKeyword mode bar height colors i3bar_command status_command position exec mode hidden_state modifier id position output background statusline tray_output tray_padding separator separator_symbol workspace_buttons strip_workspace_numbers binding_mode_indicator focused_workspace active_workspace inactive_workspace urgent_workspace binding_mode contained
-syn region i3ConfigBlock start=+.*s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable,i3ConfigVariableModifier transparent keepend extend
+syn keyword i3ConfigBlockKeyword mode bar height colors i3bar_command status_command position mode hidden_state modifier id position background statusline tray_output tray_padding separator separator_symbol workspace_buttons strip_workspace_numbers binding_mode_indicator focused_workspace active_workspace inactive_workspace urgent_workspace binding_mode exec exec_always contained
+syn region i3ConfigBlock start=+.*\s\?{$+ end=+^}$+ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigModifier,i3ConfigParen,i3ConfigColor,i3ConfigVariable transparent keepend extend
+
+" Sway options
+" General behaviour keywords
+syn keyword swayConfigFloatingModifier floating_modifier contained
+syn match swayConfigFloatingMouseAction /^\s\?.*floating_modifier\s.*\(normal\|inverted\)$/ contains=swayConfigFloatingModifier,i3ConfigVariable,i3ConfigSize
+
+syn keyword swayConfigBlockKeyword input output seat contained
+
+" sway display outputs
+syn keyword swayConfigOutputOpts mode pos position adaptive_sync scale res resolution dpms max_render_time transform scale_filter subpixel bg background fill enable disable contained
+syn keyword swayConfigOutputOptVals toggle normal flipped contained
+syn keyword swayConfigOutputBgOpts fill stretch fit center tile contained
+syn match swayConfigOutputBg /\(background\|bg\) .* \(fill\|fit\|center\|stretch\|tile\)/ contained contains=swayConfigOutputBgOpts,swayConfigBlockKeyword
+syn match swayConfigOutputFPS /@[0-9.]\+Hz/ contained
+syn match swayConfigOutputMode / [0-9]\+x[0-9]\+\(@[0-9.]\+Hz\)\?/ contained contains=swayConfigOutputFPS,i3ConfigNumber
+syn match swayConfigOutputCommand /output .*/ contains=swayConfigBlockKeyword,swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,i3ConfigVariable,i3ConfigNumber,i3ConfigColor,swayConfigOutputBg,i3ConfigBoolean
+
+" sway input devices
+syn keyword swayConfigInputOpts xkb_layout xkb_variant xkb_rules xkb_switch_layout xkb_numlock xkb_file xkb_capslock xkb_model repeat_delay repeat_rate map_to_output map_to_region map_from_region tool_mode accel_profile drag_lock drag click_method middle_emulation tap events calibration_matrix natural_scroll left_handed pointer_accel scroll_button scroll_factor scroll_method tap_button_map contained
+syn keyword swayConfigInputOptVals absolute relative enabled disabled adaptive flat none button_areas clickfinger toggle two_finger edge on_button_down lrm lmr contained
+syn keyword swayConfigInputXkbOptsKeyword xkb_options contained
+syn match swayConfigInputXkbOptsOpts /[a-z]\+:/ contained contains=i3ConfigFontSeparator
+syn match swayConfigInputXkbOpts /xkb_options \([a-z]\+:[0-9a-z_-]\+,\?\)\+/ contained contains=i3ConfigFontSeparator,swayConfigInputXkbOptsKeyword,swayConfigInputXkbOptsOpts
+syn match swayConfigInputCommand /^input\s\+".*".*/ contains=swayConfigBlockKeyword,i3ConfigNumber,i3ConfigString,swayConfigInputOpts,swayConfigInputOptVals,swayConfigInputXkbOpts,i3ConfigFontSeparator,i3ConfigBoolean
+
+" set display focus
+syn keyword swayConfigFocusKeyword focus contained
+syn match swayConfigFocus /^\s*focus\soutput\s.*$/ contains=swayConfigFocusKeyword,swayConfigBlockKeyword
+
+" sway seat
+syn keyword swayConfigSeatOpts attach cursor fallback hide_cursor idle_inhibit idle_wake keyboard_grouping shortcuts_inhibitor pointer_constraint xcursor_theme contained
+syn keyword swayConfigSeatOptVals move set press release none smart activate deactivate toggle escape enable disable contained
+syn match swayConfigSeat /seat.*/ contains=swayConfigBlockKeyword,i3ConfigString,i3ConfigNumber,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts
+
+syn region swayConfigBlock start=+^\(input\|output\|seat\).*\s{$+ end=+^}$+ contains=swayConfigBlockKeyword,i3ConfigParen,i3ConfigVariable,i3ConfigString,i3ConfigNumber,swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,i3ConfigColor,swayConfigOutputBg,swayConfigInputOpts,swayConfigInputOptVals,swayConfigInputXkbOpts,i3ConfigFontSeparator,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts transparent keepend extend
 
 " Line continuation
 syn region i3ConfigLineCont start=/^.*\\$/ end=/^$/ end=/[^\\]$/ contains=i3ConfigBlockKeyword,i3ConfigString,i3ConfigBind,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigColor,i3ConfigVariable keepend extend
 
-" Includes with relative paths to config files
-syn keyword swayConfigInclude include contained
-syn match swayConfigFile /^include\s\(\~\?\/.*$\|\.\{0,2}\/.*$\)/ contains=swayConfigInclude
-
 " Define the highlighting.
+hi def link i3ConfigKeyword                         Keyword
 hi def link i3ConfigCommand                         Function
 hi def link i3ConfigError                           Error
 hi def link i3ConfigTodo                            Todo
@@ -215,8 +236,8 @@ hi def link i3ConfigComment                         Comment
 hi def link i3ConfigOperator                        Operator
 hi def link i3ConfigParen                           Delimiter
 hi def link i3ConfigFontSeparator                   i3ConfigOperator
-hi def link i3ConfigFontKeyword                     Keyword
-hi def link i3ConfigFontNamespace                   Type
+hi def link i3ConfigFontKeyword                     i3ConfigKeyword
+hi def link i3ConfigFontNamespace                   i3ConfigOption
 hi def link i3ConfigFontContent                     Normal
 hi def link i3ConfigFontSize                        Number
 hi def link i3ConfigString                          String
@@ -225,72 +246,79 @@ hi def link i3ConfigBoolean                         Boolean
 hi def link i3ConfigColor                           Constant
 hi def link i3ConfigVariableModifier                i3ConfigOperator
 hi def link i3ConfigVariable                        Variable
-hi def link i3ConfigSetKeyword                      Keyword
-hi def link i3ConfigIncludeKeyword                  Keyword
+hi def link i3ConfigSetKeyword                      i3ConfigKeyword
+hi def link i3ConfigIncludeKeyword                  i3ConfigKeyword
 hi def link i3ConfigCommandSubstitutionDelimiter    Delimiter
 hi def link i3ConfigCommandSubstitutionRegion       Normal
 hi def link i3ConfigIncludePath                     Parameter
 hi def link i3ConfigGapStyleKeyword                 i3ConfigOption
 hi def link i3ConfigGapStyle                        i3ConfigCommand
 hi def link i3ConfigSmartGapKeyword                 i3ConfigOption
-hi def link i3ConfigSmartGap                        Keyword
+hi def link i3ConfigSmartGap                        i3ConfigKeyword
 hi def link i3ConfigSmartBorderKeyword              i3ConfigOption
-hi def link i3ConfigSmartBorder                     Keyword
+hi def link i3ConfigSmartBorder                     i3ConfigKeyword
 hi def link i3ConfigAction                          i3ConfigCommand
 hi def link i3ConfigOption                          Type
-hi def link i3ConfigUnit                            Number
+hi def link i3ConfigUnit                            i3ConfigNumber
 hi def link i3ConfigUnitOr                          i3ConfigOperator
 hi def link i3ConfigBindKey                         Constant
-hi def link i3ConfigBindKeyword                     Keyword
+hi def link i3ConfigBindKeyword                     i3ConfigKeyword
 hi def link i3ConfigBindArgument                    Parameter
 hi def link i3ConfigSizeSpecial                     i3ConfigOperator
-hi def link i3ConfigFloating                        Keyword
+hi def link i3ConfigFloating                        i3ConfigKeyword
 hi def link i3ConfigOrientationKeyword              i3ConfigOption
-hi def link i3ConfigOrientation                     Keyword
+hi def link i3ConfigOrientation                     i3ConfigKeyword
 hi def link i3ConfigLayoutKeyword                   i3ConfigOption
-hi def link i3ConfigLayout                          Keyword
+hi def link i3ConfigLayout                          i3ConfigKeyword
 hi def link i3ConfigBorderStyleKeyword              i3ConfigOption
-hi def link i3ConfigBorderStyle                     Keyword
+hi def link i3ConfigBorderStyle                     i3ConfigKeyword
 hi def link i3ConfigEdgeKeyword                     i3ConfigOption
-hi def link i3ConfigEdge                            Keyword
-hi def link i3ConfigCommandKeyword                  Keyword
+hi def link i3ConfigEdge                            i3ConfigKeyword
+hi def link i3ConfigCommandKeyword                  i3ConfigKeyword
 hi def link i3ConfigEqualsOperator                  i3ConfigOperator
 hi def link i3ConfigConditionalText                 Normal
 hi def link i3ConfigConditional                     Delimiter
-hi def link i3ConfigNoFocusKeyword                  Keyword
-hi def link i3ConfigAssignKeyword                   Keyword
+hi def link i3ConfigNoFocusKeyword                  i3ConfigKeyword
+hi def link i3ConfigAssignKeyword                   i3ConfigKeyword
 hi def link i3ConfigAssignSpecial                   i3ConfigOption
-hi def link i3ConfigResourceKeyword                 Keyword
+hi def link i3ConfigResourceKeyword                 i3ConfigKeyword
 hi def link i3ConfigExecKeyword                     i3ConfigCommand
-hi def link i3ConfigExecAlwaysKeyword               Keyword
+hi def link i3ConfigExecAlwaysKeyword               i3ConfigKeyword
 hi def link i3ConfigNoStartupId                     i3ConfigBindArgument
 hi def link i3ConfigWorkspaceKeyword                i3ConfigCommand
 hi def link i3ConfigOutput                          i3ConfigOption
-hi def link i3ConfigClientColorKeyword              Keyword
+hi def link i3ConfigClientColorKeyword              i3ConfigKeyword
 hi def link i3ConfigClientColor                     Operator
 hi def link i3ConfigTitleAlignKeyword               i3ConfigOption
-hi def link i3ConfigTitleAlign                      Keyword
-hi def link i3ConfigInterprocessKeyword             Keyword
-hi def link i3ConfigMouseWarpingKeyword             Keyword
+hi def link i3ConfigTitleAlign                      i3ConfigKeyword
+hi def link i3ConfigInterprocessKeyword             i3ConfigKeyword
+hi def link i3ConfigMouseWarpingKeyword             i3ConfigKeyword
 hi def link i3ConfigMouseWarpingType                i3ConfigOption
-hi def link i3ConfigFocusFollowsMouseKeyword        Keyword
-hi def link i3ConfigPopupOnFullscreenKeyword        Keyword
+hi def link i3ConfigFocusFollowsMouseKeyword        i3ConfigKeyword
+hi def link i3ConfigPopupOnFullscreenKeyword        i3ConfigKeyword
 hi def link i3ConfigPopupOnFullscreenType           i3ConfigOption
-hi def link i3ConfigFocusWrappingKeyword            Keyword
-hi def link i3ConfigForceXineramaKeyword            Keyword
-hi def link i3ConfigAutomaticSwitchKeyword          Keyword
-hi def link i3ConfigTimeUnit                        Number
-hi def link i3ConfigDelayUrgencyKeyword             Keyword
-hi def link i3ConfigFocusOnActivationKeyword        Keyword
+hi def link i3ConfigFocusWrappingKeyword            i3ConfigKeyword
+hi def link i3ConfigForceXineramaKeyword            i3ConfigKeyword
+hi def link i3ConfigAutomaticSwitchKeyword          i3ConfigKeyword
+hi def link i3ConfigTimeUnit                        i3ConfigNumber
+hi def link i3ConfigDelayUrgencyKeyword             i3ConfigKeyword
+hi def link i3ConfigFocusOnActivationKeyword        i3ConfigKeyword
 hi def link i3ConfigFocusOnActivationType           i3ConfigOption
-hi def link i3ConfigShowMarksKeyword                Keyword
-hi def link i3ConfigBlockKeyword                    Keyword
-hi def link swayConfigInclude                         i3ConfigCommand
-hi def link swayConfigFile                            Constant
-hi def link swayConfigFloatingModifier                Identifier
-hi def link swayConfigFloatingMouseAction             i3ConfigOption
-hi def link swayConfigFocusKeyword                    i3ConfigCommand
-hi def link swayConfigOutput                          i3ConfigCommand
-hi def link swayConfigOutputCommand                   Identifier
+hi def link i3ConfigShowMarksKeyword                i3ConfigKeyword
+hi def link i3ConfigBlockKeyword                    i3ConfigKeyword
+hi def link swayConfigFloatingModifier              Identifier
+hi def link swayConfigFloatingMouseAction           i3ConfigOption
+hi def link swayConfigFocusKeyword									i3ConfigAction
+hi def link swayConfigOutputOpts  									i3ConfigKeyword
+hi def link swayConfigOutputBgOpts                  i3ConfigOption
+hi def link swayConfigOutputOptVals                 i3ConfigOption
+hi def link swayConfigOutputFPS                     Constant
+hi def link swayConfigInputOptVals                  i3ConfigOption
+hi def link swayConfigInputOpts                     i3ConfigKeyword
+hi def link swayConfigInputXkbOptsOpts              i3ConfigOption
+hi def link swayConfigInputXkbOptsKeyword           i3ConfigKeyword
+hi def link swayConfigSeatOpts                      i3ConfigKeyword
+hi def link swayConfigSeatOptVals                   i3ConfigOption
+hi def link swayConfigBlockKeyword                  i3ConfigAction
 
 let b:current_syntax = "i3config"
