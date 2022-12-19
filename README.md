@@ -8,7 +8,8 @@ types and options as defined in the i3 configuration manual.
 Visit for the latest specification:
 <http://i3wm.org/docs/userguide.html#configuring>
 
-![screenshot](screenshot.png)
+![i3 only screenshot](https://user-images.githubusercontent.com/54900518/220209998-5cc18e59-8d60-4176-9ed0-b164adf1d2a2.png)
+![sway specific bindings](https://user-images.githubusercontent.com/54900518/220209797-42e68601-5bf4-4736-8eb4-d11861cbc472.png)
 
 used colourscheme: [NerdContrast](https://github.com/JosefLitos/nerdcontrast.nvim)
 
