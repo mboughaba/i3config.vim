@@ -209,7 +209,7 @@ syn match i3ConfigColorsCategory /\(focused_\)\?\(background\|statusline\|separa
 syn region i3ConfigColorsBlock start=/^\s\+colors {$/ end=/^\s\+}$/ contained contains=i3ConfigColorsKeyword,i3ConfigColorsCategory,i3ConfigColor,i3ConfigVariable,i3ConfigComment,i3ConfigParen fold keepend extend
 
 " Bar block
-syn keyword i3ConfigBarBlockKeyword bar i3bar_command status_command mode hidden_state id position output tray_output tray_padding font separator_symbol workspace_buttons workspace_min_width strip_workspace_numbers strip_workspace_name binding_mode_indicator padding height contained
+syn keyword i3ConfigBarBlockKeyword bar i3bar_command status_command mode hidden_state id position output tray_output tray_padding font separator_symbol workspace_buttons workspace_min_width strip_workspace_numbers strip_workspace_name binding_mode_indicator padding contained
 syn keyword i3ConfigBarModifierKeyword modifier contained
 syn match i3ConfigBarModifierLine /^\s\+modifier [^ ]\+$/ contained contains=i3ConfigBarModifierKeyword,i3ConfigBindModifier,i3ConfigVariable,i3ConfigBindModkey
 syn region i3ConfigBarBlock start=/^bar {$/ end=/^}$/ contains=i3ConfigBarBlockKeyword,i3ConfigBarModifierLine,i3ConfigBind,i3ConfigString,i3ConfigComment,i3ConfigFont,i3ConfigBoolean,i3ConfigNumber,i3ConfigOperator,i3ConfigParen,i3ConfigColor,i3ConfigVariable,i3ConfigColorsBlock fold keepend extend

@@ -27,6 +27,8 @@ syn match i3ConfigBind /^\s*bind\(sym\|code\|switch\|gesture\)\s\+.*[^{]$/ conta
 
 syn region i3ConfigModeBlock start=/^mode\( --pango_markup\)\? \([^'" {]\+\|'[^']\+'\|".\+"\)\s\+{$/ end=/^\s*}$/ contains=i3ConfigModeKeyword,i3ConfigString,i3ConfigVariable,i3ConfigBind,swayConfigBindComboBlock,swayConfigBindswitchBlock,swayConfigBindgestureBlock,i3ConfigComment,i3ConfigNumber,i3ConfigParen fold keepend extend
 
+syn keyword i3ConfigBarBlockKeyword bar id swaybar_command binding_mode_indicator font gaps height hidden_state mode output pango_markup position separator_symbol status_command status_edge_padding status_padding strip_workspace_name strip_workspace_numbers wrap_scroll workspace_buttons workspace_min_width tray_bindcode tray_bindsym tray_padding tray_output icon_theme contained
+
 " Sway options
 " sway bindswitch and bindgesture
 syn region swayConfigBindComboBlock start=/^\s*bind\(sym\|code\)\s\+.*{$/ end=/^\s*}$/ contains=i3ConfigBindKeyword,i3ConfigBindCombo,i3ConfigBindArgument,i3ConfigNumber,i3ConfigVariable,i3ConfigAction,i3ConfigOption,i3ConfigGapStyleKeyword,i3ConfigOperator,i3ConfigString,i3ConfigUnit,i3ConfigUnitOr,i3ConfigConditional,swayConfigOutputCommand,i3ConfigBoolean,i3ConfigExec,i3ConfigComment,i3ConfigParen fold keepend extend
