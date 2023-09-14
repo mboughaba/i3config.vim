@@ -1,78 +1,77 @@
-# i3config.vim - vim i3 config syntax highlighting
+# i3config.vim - vim i3/sway config syntax highlighting
 
-This file contains the syntax highlighting that I use for i3 config in Vim.
-Compared to the vim standard `conf` syntax highlighting, i3config
-adds highlighting of all keywords,
-types and options as defined in the i3 configuration manual.
+This file contains the syntax highlighting that I use for i3/sway config in NeoVim.
+It aims to guide you through configuration by distinctive and detailed highlights that
+make it clear if you're configuration is valid. It also helps in navigating through.
 
-Visit for the latest specification:
-<http://i3wm.org/docs/userguide.html#configuring>
+### References
+- [i3 Guide](http://i3wm.org/docs/userguide.html#configuring)
+- [sway](https://github.com/swaywm/sway/blob/master/sway/sway.5.scd)
+- [sway-bar](https://github.com/swaywm/sway/blob/master/sway/sway-bar.5.scd)
+- [sway-input](https://github.com/swaywm/sway/blob/master/sway/sway-input.5.scd)
+- [sway-output](https://github.com/swaywm/sway/blob/master/sway/sway-output.5.scd)
 
-![i3 only screenshot](https://user-images.githubusercontent.com/54900518/220209998-5cc18e59-8d60-4176-9ed0-b164adf1d2a2.png)
-![sway specific bindings](https://user-images.githubusercontent.com/54900518/220209797-42e68601-5bf4-4736-8eb4-d11861cbc472.png)
+Condensed showcase of `swayconfig` highlighting capabilities
+![screenshot](https://github.com/JosefLitos/i3config.vim/assets/54900518/b4ddd978-2865-4ac4-95ca-fcffb3f0ab74)
 
 used colourscheme: [NerdContrast](https://github.com/JosefLitos/nerdcontrast.nvim)
 
 ## Features
 
 - nice and clear syntax highlighting of i3 keywords and operators,
-- wrong syntax will be highlighted as an **error**
+- wrong syntax will be highlighted as an **error** or like the first word (keyword)
 - if something is not an error but wrong highlighting, please report it to this repo
 
 ### File type detection
 
 Nowadays we usually use \*i3/config, therefore the filetype is used in
-connection with such path. But for convenience anything as \*i3\*config is recognized.
+connection with such path. But for convenience anything as `*i3config`/`*swayconfig` is recognized.
 
-Additonally, you can add `# vim: filetype=i3config` anywhere in your config file, as suggested by the original plugin (see below).
+Additonally, you can add `# vim: filetype=i3config` or `swayconfig` to the bottom of your config file.
 
 ## Installation instructions
 
-Follow one of the steps below and reload vim afterwards.
+This plugin is a reference for syntax files included in `vim`, so it serves mainly for testing
+purposes. All changes should make its way to `vim` - in case of difference please report an issue.
 
-### vim-plug
+### [`vim-plug`](https://github.com/junegunn/vim-plug)
 
-Install using [vim-plug](https://github.com/junegunn/vim-plug). Similar than the installation for Vundle, just change `Plugin` to `Plug`:
+Similar tto the installation for Vundle, just change `Plugin` to `Plug`:
 
 Add
 
 ```vim
-Plug 'JosefLitos/vim-i3config'
+Plug 'JosefLitos/i3config.vim'
 ```
 
 to `.vimrc` and run `:PlugInstall`.
 
-### packer.nvim
-
-Install [packer.nvim](https://github.com/wbthomason/packer.nvim)
+### [`lazy.nvim`](https://github.com/folke/lazy.nvim)
 
 ```lua
-use 'JosefLitos/vim-i3config'
+return {
+  'JosefLitos/i3config.vim',
+  lazy = true,
+  ft = {"i3config", "swayconfig"}
+}
 ```
 
 ### Manual installation
 
 Copy both i3config.vim file
-to .vim/after/syntax and .vim/after/ftdetect respectively.
+to .vim/syntax and .vim/ftdetect respectively.
 
 ```sh
-git clone https://github.com/JosefLitos/vim-i3config.git /tmp/i3config.vim
-mkdir -p ~/.vim/after/syntax/
-mv /tmp/i3config.vim/after/syntax/i3config.vim ~/.vim/after/syntax/i3config.vim
+git clone https://github.com/JosefLitos/i3config.vim.git /tmp/i3config.vim
+mkdir -p ~/.vim/syntax/
+mv /tmp/i3config.vim/syntax/i3config.vim ~/.vim/syntax/i3config.vim
 rm -rf /tmp/i3config.vim
 ```
-
-## Inspired by
-
-+ PotatoesMaster/i3-vim-syntax
-  <https://github.com/PotatoesMaster/i3-vim-syntax>
-+ vim-scripts/edifact.vim
-  <https://github.com/vim-scripts/edifact.vim> (For Error highlighting).
 
 ## Contribution
 
 Feel free to make a pull request, I will integrate it when time permits.
-Make sure to add a line to cover your test in the *test.i3config*.
+Make sure to add a line to cover your test in `test.swayconfig`.
 
 ## License
 
