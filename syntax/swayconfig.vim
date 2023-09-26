@@ -1,9 +1,8 @@
 " Vim syntax file
-" Language: sway window manager config
-" Original Author: Josef Litos
+" Language: sway config file
+" Original Author: Josef Litos (JosefLitos/i3config.vim)
 " Maintainer: James Eapen <james.eapen@vai.org>
 " Version: 1.0.0
-" Reference version (JosefLitos/i3config.vim): 1.8.1
 " Last Change: 2023-09-14
 
 " References:
