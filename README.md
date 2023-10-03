@@ -2,7 +2,7 @@
 
 This file contains the syntax highlighting that I use for i3/sway config in NeoVim.
 It aims to guide you through configuration by distinctive and detailed highlights that
-make it clear if you're configuration is valid. It also helps in navigating through.
+make it clear if your configuration is valid. It also helps in navigating through.
 
 ### References
 - [i3 Guide](http://i3wm.org/docs/userguide.html#configuring)
@@ -32,11 +32,11 @@ Additonally, you can add `# vim: filetype=i3config` or `swayconfig` to the botto
 ## Installation instructions
 
 This plugin is a reference for syntax files included in `vim`, so it serves mainly for testing
-purposes. All changes should make its way to `vim` - in case of difference please report an issue.
+purposes. All changes should make its way to `vim` - in case of differences, please report an issue in this repo.
 
 ### [`vim-plug`](https://github.com/junegunn/vim-plug)
 
-Similar tto the installation for Vundle, just change `Plugin` to `Plug`:
+Similar to the installation for Vundle, just change `Plugin` to `Plug`:
 
 Add
 
@@ -57,9 +57,6 @@ return {
 ```
 
 ### Manual installation
-
-Copy both i3config.vim file
-to .vim/syntax and .vim/ftdetect respectively.
 
 ```sh
 git clone https://github.com/JosefLitos/i3config.vim.git /tmp/i3config.vim
