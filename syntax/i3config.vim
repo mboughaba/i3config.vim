@@ -2,8 +2,8 @@
 " Language: i3 config file
 " Original Author: Josef Litos (JosefLitos/i3config.vim)
 " Maintainer: Quentin Hibon (github user hiqua)
-" Version: 1.0.0
-" Last Change: 2023-09-14
+" Version: 1.0.1
+" Last Change: 2023-10-23
 
 " References:
 " http://i3wm.org/docs/userguide.html#configuring
@@ -27,8 +27,10 @@ syn keyword i3ConfigTodo TODO FIXME XXX contained
 syn match i3ConfigSeparator /[,;\\]/ contained
 syn match i3ConfigParen /[{}]/ contained
 syn keyword i3ConfigBoolean yes no enabled disabled on off true false contained
-syn region i3ConfigString start=/\W\@<="/ skip=/\\\("\|$\)/ end=/"\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
-syn region i3ConfigString start=/\W\@<='/ skip=/\\$/ end=/'\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
+" String in simpler (matchable end) and more robust (includes `extend` keyword) forms
+syn match i3ConfigString /\(["']\)[^\\"']*\1/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction
+syn region i3ConfigString start=/"[^\\"']*[\\']/ skip=/\\\@<=\("\|$\)/ end=/"\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
+syn region i3ConfigString start=/'[^\\"']*[\\"]/ skip=/\\\@<=$/ end=/'\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
 syn match i3ConfigColor /#[0-9A-Fa-f]\{3,8}/ contained
 syn match i3ConfigNumber /[0-9A-Za-z_$-]\@<!-\?\d\+\w\@!/ contained
 
@@ -92,7 +94,7 @@ syn keyword i3ConfigSmartBorderOpts no_gaps contained
 syn match i3ConfigKeyword /^smart_borders \(on\|off\|no_gaps\)$/ contains=i3ConfigSmartBorderOpts,i3ConfigBoolean
 
 " 4.15 Arbitrary commands
-syn region i3ConfigKeyword start=/^for_window / end=/$/ contains=i3ConfigForWindowKeyword,i3ConfigCriteria keepend
+syn region i3ConfigKeyword start=/^for_window / skip=/\\$/ end=/$/ contains=i3ConfigForWindowKeyword,i3ConfigCriteria keepend
 
 " 4.16 No opening focus
 syn match i3ConfigKeyword /^no_focus .*$/ contains=i3ConfigCondition
@@ -118,7 +120,7 @@ syn match i3ConfigShCmdDelim /\$(/ contained
 syn region i3ConfigShCommand start=/\$(/ end=/)/ contained contains=i3ConfigShCmdDelim,i3ConfigExecAction,i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigString,i3ConfigNumber,i3ConfigVariable keepend extend
 syn match  i3ConfigShDelim /[[\]{}();`]\+/ contained
 syn match  i3ConfigShOper /[<>&|+=~^*!.?]\+/ contained
-syn match i3ConfigShParam /\<-[0-9A-Za-z_-]\+\>/ contained containedin=i3ConfigVar
+syn match i3ConfigShParam /\<-[A-Za-z-][0-9A-Za-z_-]*\>/ contained containedin=i3ConfigVar
 syn region i3ConfigExec start=/^\s*exec\(_always\)\?\( --no-startup-id\)\? [^{]/ skip=/\\$/ end=/$/ contains=i3ConfigExecKeyword,i3ConfigExecAlwaysKeyword,i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigString,i3ConfigVariable,i3ConfigExecAction keepend
 
 " 4.21 Workspaces per output

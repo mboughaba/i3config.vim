@@ -72,7 +72,8 @@ set_from_resource $black i3wm.color0 #000000
 assign [all] 1
 assign [class="^URxvt$"] → number "2: work"
 # 4.20
-exec_always swayidle 'swaymsg output \* off' --resume 'swaymsg output \* power on' &>/dev/null
+exec_always swayidle 'swaymsg output \* off' --resume 'swaymsg output "Very specific\
+ display name" power on' &>/dev/null
 # 4.21
 workspace $w1 output primary
 workspace "2: vim" output VGA1

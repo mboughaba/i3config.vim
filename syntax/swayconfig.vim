@@ -2,8 +2,8 @@
 " Language: sway config file
 " Original Author: Josef Litos (JosefLitos/i3config.vim)
 " Maintainer: James Eapen <james.eapen@vai.org>
-" Version: 1.0.0
-" Last Change: 2023-09-14
+" Version: 1.0.1
+" Last Change: 2023-10-23
 
 " References:
 " http://i3wm.org/docs/userguide.html#configuring
@@ -27,10 +27,11 @@ syn keyword i3ConfigConditionProp app_id pid shell contained
 syn keyword i3ConfigWorkspaceDir prev_on_output next_on_output contained
 
 syn keyword swayConfigBindKeyword bindswitch bindgesture contained
-syn match i3ConfigBindArgument /--\(locked\|to-code\|no-repeat\|input-device=[:0-9a-zA-Z_/-]\+\|no-warn\)/ contained
+syn match i3ConfigBindArgument /--\(locked\|to-code\|no-repeat\|input-device=[^ '"]*\|no-warn\)/ contained contains=i3ConfigColonOperator,i3ConfigVariable
+syn match i3ConfigBindComboLine /bind\(sym\|code\)\( --[a-z-]\+\(=\([^ '"]*\|['"][^'"]*['"]\)\)\?\)* [$0-9A-Za-z_+]\+ / contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigBindCombo,i3ConfigString
 syn region i3ConfigBind start=/^\s*bind\(switch\|gesture\) / skip=/\\$/ end=/$/ contains=swayConfigBindKeyword,swayConfigBindswitch,swayConfigBindswitchArgument,swayConfigBindgesture,swayConfigBindgestureArgument,i3ConfigCriteria,i3ConfigAction,i3ConfigSeparator,i3ConfigActionKeyword,i3ConfigOption,i3ConfigString,i3ConfigNumber,i3ConfigVariable,i3ConfigBoolean keepend
 
-syn match swayConfigBindBlockHeader /^\s*bind\(sym\|code\) .*{$/ contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigParen
+syn match swayConfigBindBlockHeader /^\s*bind\(sym\|code\) .*{$/ contained contains=i3ConfigBindKeyword,i3ConfigBindArgument,i3ConfigParen,i3ConfigString
 syn match swayConfigBindBlockCombo /^\s\+\(--[a-z-]\+ \)*[$a-zA-Z0-9_+]\+ [a-z[]\@=/ contained contains=i3ConfigBindArgument,i3ConfigBindCombo
 syn region i3ConfigBind start=/^\s*bind\(sym\|code\) .*{$/ end=/^\s*}$/ contains=swayConfigBindBlockHeader,swayConfigBindBlockCombo,i3ConfigCriteria,i3ConfigAction,i3ConfigSeparator,i3ConfigActionKeyword,i3ConfigOption,i3ConfigString,i3ConfigNumber,i3ConfigVariable,i3ConfigBoolean,i3ConfigComment,i3ConfigParen fold keepend extend
 " fix for extra long bindsym blocks that would be parsed incorrectly when scrolling up
