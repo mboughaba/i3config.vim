@@ -2,8 +2,8 @@
 " Language: sway config file
 " Original Author: Josef Litos (JosefLitos/i3config.vim)
 " Maintainer: James Eapen <james.eapen@vai.org>
-" Version: 1.0.1
-" Last Change: 2023-10-23
+" Version: 1.0.2
+" Last Change: 2023-10-25
 
 " References:
 " http://i3wm.org/docs/userguide.html#configuring
@@ -66,14 +66,14 @@ syn match swayConfigBindswitchArgument /--\(locked\|no-warn\|reload\)/ contained
 syn keyword swayConfigBindswitchType lid tablet contained
 syn keyword swayConfigBindswitchState toggle contained
 syn match swayConfigBindswitch /\(lid\|tablet\):\(on\|off\|toggle\) / contained contains=swayConfigBindswitchType,i3ConfigColonOperator,swayConfigBindswitchState,i3ConfigBoolean
-syn region i3ConfigBind start=/^\s*bindswitch\s\+.*{$/ end=/^\s*}$/ contains=swayConfigBindKeyword,swayConfigBindswitch,swayConfigBindswitchArgument,i3ConfigNumber,i3ConfigVariable,i3ConfigAction,i3ConfigActionKeyword,i3ConfigOption,i3ConfigSeparator,i3ConfigString,i3ConfigCriteria,swayConfigOutputCommand,i3ConfigBoolean,i3ConfigComment,i3ConfigParen fold keepend extend
+syn region i3ConfigBind start=/^\s*bindswitch\s\+.*{$/ end=/^\s*}$/ contains=swayConfigBindKeyword,swayConfigBindswitch,swayConfigBindswitchArgument,i3ConfigNumber,i3ConfigVariable,i3ConfigAction,i3ConfigActionKeyword,i3ConfigOption,i3ConfigSeparator,i3ConfigString,i3ConfigCriteria,swayConfigOutputCommand,i3ConfigBoolean,i3ConfigParen,i3ConfigComment fold keepend extend
 
 " Bindgesture
 syn match swayConfigBindgestureArgument /--\(exact\|input-device=[:0-9a-zA-Z_/-]\+\|no-warn\)/ contained
 syn keyword swayConfigBindgestureType hold swipe pinch contained
 syn keyword swayConfigBindgestureDir up down left right inward outward clockwise counterclockwise contained
 syn match swayConfigBindgesture /\(hold\(:[1-5]\)\?\|swipe\(:[3-5]\)\?\(:up\|:down\|:left\|:right\)\?\|pinch\(:[2-5]\)\?:\(+\?\(inward\|outward\|clockwise\|counterclockwise\|up\|down\|left\|right\)\)\+\) / contained contains=i3ConfigNumber,swayConfigBindgestureType,i3ConfigColonOperator,swayConfigBindgestureDir,i3ConfigBindModifier
-syn region i3ConfigBind start=/^\s*bindgesture\s\+.*{$/ end=/^\s*}$/ contains=swayConfigBindKeyword,swayConfigBindgesture,swayConfigBindgestureArgument,i3ConfigCriteria,i3ConfigAction,i3ConfigSeparator,i3ConfigActionKeyword,i3ConfigOption,i3ConfigString,i3ConfigNumber,i3ConfigVariable,i3ConfigBoolean,i3ConfigParen fold keepend extend
+syn region i3ConfigBind start=/^\s*bindgesture\s\+.*{$/ end=/^\s*}$/ contains=swayConfigBindKeyword,swayConfigBindgesture,swayConfigBindgestureArgument,i3ConfigCriteria,i3ConfigAction,i3ConfigSeparator,i3ConfigActionKeyword,i3ConfigOption,i3ConfigString,i3ConfigNumber,i3ConfigVariable,i3ConfigBoolean,i3ConfigParen,i3ConfigComment fold keepend extend
 
 " Tiling drag threshold
 syn match i3ConfigKeyword /^tiling_drag_threshold \d\+$/ contains=i3ConfigNumber
@@ -96,7 +96,7 @@ syn match swayConfigXkbOptsPair /[a-z]\+:[0-9a-z_-]\+/ contained contains=swayCo
 syn match swayConfigInputXkbOpts /xkb_options \([a-z]\+:[0-9a-z_-]\+,\?\)\+/ contained contains=swayConfigXkbOptsPair,swayConfigDeviceOps
 syn region i3ConfigAction start=/input/ skip=/\\$/ end=/\([,;]\|$\)/ contained contains=swayConfigInputStart,swayConfigInputXkbOpts,swayConfigInputOpts,swayConfigInputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigBoolean,swayConfigDeviceOps keepend transparent
 syn region i3ConfigInput start=/^input/ skip=/\\$/ end=/$/ contains=swayConfigInputStart,swayConfigInputXkbOpts,swayConfigInputOpts,swayConfigInputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigBoolean,swayConfigDeviceOps keepend
-syn region i3ConfigInput start=/^input .* {/ end=/}$/ contains=swayConfigInputStart,swayConfigInputXkbOpts,swayConfigInputOpts,swayConfigInputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigBoolean,swayConfigDeviceOps,i3ConfigParen keepend extend
+syn region i3ConfigInput start=/^input .* {/ end=/}$/ contains=swayConfigInputStart,swayConfigInputXkbOpts,swayConfigInputOpts,swayConfigInputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigBoolean,swayConfigDeviceOps,i3ConfigParen,i3ConfigComment keepend extend
 
 " Seat
 syn keyword swayConfigSeatKeyword seat contained
@@ -105,7 +105,7 @@ syn match swayConfigSeatOptVals /when-typing/ contained
 syn keyword swayConfigSeatOptVals move set press release none smart activate deactivate toggle escape enable disable contained
 syn region i3ConfigAction start=/seat/ skip=/\\$/ end=/\([,;]\|$\)/ contained contains=swayConfigSeatKeyword,i3ConfigString,i3ConfigNumber,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts,swayConfigDeviceOps,swayConfigInputType keepend transparent
 syn region swayConfigSeat start=/seat/ skip=/\\$/ end=/$/ contains=swayConfigSeatKeyword,i3ConfigString,i3ConfigNumber,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts,swayConfigDeviceOps,swayConfigInputType keepend
-syn region swayConfigSeat start=/seat .* {$/ end=/}$/ contains=swayConfigSeatKeyword,i3ConfigString,i3ConfigNumber,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts,swayConfigDeviceOps,i3ConfigParen,swayConfigInputType keepend extend
+syn region swayConfigSeat start=/seat .* {$/ end=/}$/ contains=swayConfigSeatKeyword,i3ConfigString,i3ConfigNumber,i3ConfigBoolean,swayConfigSeatOptVals,swayConfigSeatOpts,swayConfigDeviceOps,i3ConfigParen,swayConfigInputType,i3ConfigComment keepend extend
 
 " Output monitors
 syn keyword swayConfigOutputKeyword output contained
@@ -116,7 +116,7 @@ syn match swayConfigOutputFPS /@[0-9.]\+Hz/ contained
 syn match swayConfigOutputMode / [0-9]\+x[0-9]\+\(@[0-9.]\+Hz\)\?/ contained contains=swayConfigOutputFPS
 syn region i3ConfigAction start=/output/ skip=/\\$/ end=/\([,;]\|$\)/ contained contains=swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,swayConfigOutputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigString,i3ConfigColor,i3ConfigBoolean,swayConfigDeviceOps keepend transparent
 syn region swayConfigOutput start=/^output/ skip=/\\$/ end=/$/  contains=swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,swayConfigOutputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigString,i3ConfigColor,i3ConfigBoolean,swayConfigDeviceOps keepend
-syn region swayConfigOutput start=/^output .* {$/ end=/}$/  contains=swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,swayConfigOutputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigString,i3ConfigColor,i3ConfigBoolean,swayConfigDeviceOps,i3ConfigParen keepend extend
+syn region swayConfigOutput start=/^output .* {$/ end=/}$/  contains=swayConfigOutputKeyword,swayConfigOutputMode,swayConfigOutputOpts,swayConfigOutputOptVals,i3ConfigVariable,i3ConfigNumber,i3ConfigString,i3ConfigColor,i3ConfigBoolean,swayConfigDeviceOps,i3ConfigParen,i3ConfigComment keepend extend
 
 " Define the highlighting.
 hi def link swayConfigFloatingModifierOpts   i3ConfigOption
