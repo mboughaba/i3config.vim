@@ -2,8 +2,8 @@
 " Language: i3 config file
 " Original Author: Josef Litos (JosefLitos/i3config.vim)
 " Maintainer: Quentin Hibon (github user hiqua)
-" Version: 1.0.1
-" Last Change: 2023-10-23
+" Version: 1.0.2
+" Last Change: 2023-10-26
 
 " References:
 " http://i3wm.org/docs/userguide.html#configuring
@@ -28,9 +28,9 @@ syn match i3ConfigSeparator /[,;\\]/ contained
 syn match i3ConfigParen /[{}]/ contained
 syn keyword i3ConfigBoolean yes no enabled disabled on off true false contained
 " String in simpler (matchable end) and more robust (includes `extend` keyword) forms
-syn match i3ConfigString /\(["']\)[^\\"']*\1/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction
-syn region i3ConfigString start=/"[^\\"']*[\\']/ skip=/\\\@<=\("\|$\)/ end=/"\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
-syn region i3ConfigString start=/'[^\\"']*[\\"]/ skip=/\\\@<=$/ end=/'\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
+syn match i3ConfigString /\(["']\)[^\\"')\]}]*\1/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction
+syn region i3ConfigString start=/"[^\\"')\]}]*[\\')\]}]/ skip=/\\\@<=\("\|$\)/ end=/"\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
+syn region i3ConfigString start=/'[^\\"')\]}]*[\\")\]}]/ skip=/\\\@<=$/ end=/'\|$/ contained contains=i3ConfigShCommand,i3ConfigShDelim,i3ConfigShOper,i3ConfigShParam,i3ConfigNumber,i3ConfigVariable,i3ConfigExecAction keepend extend
 syn match i3ConfigColor /#[0-9A-Fa-f]\{3,8}/ contained
 syn match i3ConfigNumber /[0-9A-Za-z_$-]\@<!-\?\d\+\w\@!/ contained
 
