@@ -1,0 +1,264 @@
+# 1) ERROR
+	 sdsjdkjsdkO
+	fon t xft : System San Francisco Display,FontAwesome UI
+$var.one
+bindsym --border --whole-win Mod1+Mod4s focu 4
+for_window [app=__focused__] move workspace "$work" ; workspace "$work"
+floating_maximum_size -1  -1
+workspace_layout defeult
+new_window none
+new_window pixel
+new_float normal 2
+      
+
+## i3wm test
+# 4.1
+include `fd -H "~/.config/sway/config"`
+include ~/.config/$DESKTOP/config.d/*.conf
+# 4.2
+# This is a comment
+# TODO: This is a todo comment
+	 # This is another comment
+# 4.3
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:DejaVu Mono, Terminus Bold Semi-Condensed 11
+font pango:Terminus 11px
+bar {
+	#font xft:Cousine, FontAwesome 10
+	font xft:System San Francisco Display, FontAwesome 10
+}
+# 4.4
+bindsym Ctrl+Shift+Mod4+x [all] kill; restart
+bindcode 214 exec --no-startup-id i3-msg "workspace 3" something
+bindsym --release $mod+b exec --no-startup-id fd -t f $(ls "$pics")
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+# 4.5
+bindsym --border --whole-window --exclude-titlebar Ctrl+button3 kill
+# 4.6
+mode --pango_markup "<b>extra</b>" {
+	# empty
+}
+mode $extra {
+	bindsym $mod+button3 fullscreen toggle
+}
+# 4.7
+floating_modifier Mod1
+floating_modifier $Mod1
+# 4.8
+floating_minimum_size -1 x 0
+# 4.9
+default_orientation auto
+# 4.10
+workspace_layout tabbed
+# 4.11
+title_align center
+# 4.12
+default_border none
+default_border normal $def_border_pix
+default_floating_border pixel 1
+# 4.13
+hide_edge_borders smart_no_gaps
+# 4.14
+smart_borders no_gaps
+# 4.15
+for_window [title="x200: ~/work"] floating enable, move workspace "$work", focus
+# 4.16
+no_focus [window_role="pop-up"]
+# 4.17
+set $cmd bg $(fd -H '~/Pictures/') --output 4 
+# 4.18
+set_from_resource $black i3wm.color0 #000000
+# 4.19
+assign [all] 1
+assign [class="^URxvt$"] → number "2: work"
+# 4.20
+exec_always swayidle 'swaymsg output \* off' --resume 'swaymsg output "Very specific\
+ display name" power on' &>/dev/null
+# 4.21
+workspace $w1 output primary
+workspace "2: vim" output VGA1
+# 4.22
+client.focused|focused_inactive|focused_tab_title|unfocused|urgent|placeholder #000000
+client.background $bg
+# 4.23
+ipc-socket ~/.i3/i3-ipc.sock
+# 4.24
+focus_follows_mouse yes
+# 4.25
+mouse_warping output
+mouse_warping none
+# 4.26
+popup_during_fullscreen smart
+popup_during_fullscreen ignore
+popup_during_fullscreen leave_fullscreen
+# 4.27
+focus_wrapping no
+focus_wrapping force
+# 4.28
+force_xinerama no
+# 4.29
+workspace_auto_back_and_forth yes
+# 4.30
+force_display_urgency_hint 1 ms
+force_display_urgency_hint 0
+# 4.31
+focus_on_window_activation smart
+focus_on_window_activation urgent
+focus_on_window_activation focus
+focus_on_window_activation none
+# 4.32
+show_marks yes
+# 4.34
+tiling_drag modifier titlebar
+tiling_drag off
+# 4.35
+gaps inner|outer|horizontal|vertical|top|left|bottom|right all|current? minus|plus|set? 40
+workspace 3 gaps inner 0
+smart_gaps inverse_outer
+smart_gaps on
+# 5
+bar {
+	i3bar_command status_command mode dock|hide|invisible hidden_state hide|show
+	# 5.3
+	modifier none
+	modifier Mod4+Ctrl
+	# 5.4
+	bindsym --release button2 reload
+	
+	id position top|bottom output|tray_output none|primary|nonprimary|HDMI... tray_padding 0
+	# 5.10
+	font pango:DejaVu Sans Mono 10
+
+	separator_symbol ":|:" workspace_buttons yes|no workspace_min_width 40
+	strip_workspace_name yes|no binding_mode_indicator
+	# 5.16
+	colors {
+		background statusline separator focused_background focused_statusline #fff $color
+		focused_workspace active_workspace inactive_workspace urgent_workspace binding_mode
+	}
+
+	padding 0
+}
+# 6
+exec i3-msg border none
+for_window [all floating tiling] title_window_icon padding 1
+for_window [class instance window_role window_type machine id title urgent workspace con_mark]
+for_window [con_id floating_from tiling_from = __focused__]
+# 6.1
+bindsym $mod+p exec "notify-send \\"Hello, i3; from $USER\\""
+# 6.2
+bindsym $mod+v split vertical horizontal toggle
+# 6.3
+bindsym _ layout split|all|default|tabbed|stacking|splitv|splith
+# 6.4
+bindsym _ focus left|right|up|down|parent|child|floating|tiling|mode_toggle|next|prev sibling, \
+  focus output left|right|down|up|current|primary|nonprimary|next|HDMI...
+# 6.8.2
+bindsym _ exec i3-msg 'rename workspace to "10: www"'
+# 6.5,6.9-6.11
+bindsym _ move left|right|down|up 10 px ppt absolute position center mouse scratchpad, \
+  move --no-auto-back-and-forth window|container to mark|workspace prev|next|current|number 4
+# 6.12
+bindsym _ resize grow|shrink|set up|down|left|right|width|height 10 px ppt
+# 6.14
+bindsym _ mark --add --toggle name, mark --replace name; unmark name
+# 6.24
+bindsym _ gaps inner|outer... all|current set|plus|minus|toggle 30
+# 6.other
+bindsym _ split vertical|horizontal|toggle, swap container with id|con_id|mark identifier,\
+	sticky enable|disable|toggle, title_format "<b>%title</b>: %class %instance %machine",\
+	title_window_icon yes|no|toggle|padding 0, border none|normal|pixel|toggle 0,\
+	scratchpad show, nop, bar hidden_state hide|show|toggle ID, bar mode dock|hide|invisible|toggle\
+	exit, reload, restart, fullscreen|floating enable|disable|toggle
+# ignoring: shmlog, debuglog
+
+## Sway additions
+# sway
+xwayland force
+bindsym _ border toggle|none|normal|pixel|csd 4, focus tiling|floating,\
+	inhibit_idle focus, inhibit_idle fullscreen, inhibit_idle open, inhibit_idle visible
+# ignoring: max_render_time off
+bindsym _ move container|window|workspace to output left,\
+	shortcuts_inhibitor enable|disable, split v|h|none|t, splitv|splith|splitt
+bindswitch --locked --no-warn --reload {
+	lid:on nop
+	lid:off nop
+	tablet:toggle nop
+}
+bindgesture --exact --input-device=Mouse:3 --no-warn {
+	hold:1 hold:5 nop
+	swipe:3 swipe:5:up nop
+	pinch:2:down pinch:5:inward pinch:4:counterclockwise nop
+}
+floating_modifier Mod1 normal
+floating_modifier Mod1 inverse
+hide_edge_borders --i3 none
+bindsym _ opacity set|plus|minus 1, urgent enable|disable|allow|deny
+tiling_drag_threshold 3
+bindsym _ workspace prev_on_output|next_on_output
+# sway-bar
+bar {
+	swaybar_command
+	binding_mode_indicator yes|no
+	gaps 10 10 10 10
+	height 20
+	mode overlay
+	output *
+	pango_markup enabled|disabled
+	status_edge_padding|status_padding|workspace_min_width 0
+	strip_workspace_name|strip_workspace_numbers|wrap_scroll|workspace_buttons yes|no,
+	# TRAY
+	tray_bindcode 1 ContextMenu...
+	tray_bindsym button1 ScrollUp...
+	icon_theme 1
+}
+# sway-input
+input type:keyboard {
+	repeat_delay|repeat_rate 220 xkb_file $name xkb_layout us,de xkb_model xkb_rules
+	xkb_switch_layout 3|next|prev xkb_variant xkb_capslock|xkb_numlock enabled|disabled
+}
+input type:!kb map_to_output $eDP-1 map_to_region $x $y $width $height map_from_region X1xY1 X2xY2
+input type:tablet_tool|type:tablet_pad tool_mode pen|eraser|brush|pencil|airbrush|*
+input type:touchpad|type:pointer|type:touch|type:switch {
+	accel_profile adaptive|flat
+	calibration_matrix 1 2 3 4 5 6
+	click_method none|button_areas|clickfinger
+	drag|drag_lock|dwt|dwtp|left_handed|middle_emulation|natural_scroll|tap enabled|disabled
+	events enabled|disabled|disabled_on_external_mouse|toggle
+	pointer_accel -1
+	scroll_button disable|button12389
+	tap_button_map lrm|lmr
+	scroll_factor 1
+	scroll_method none|two_finger|edge|on_button_down
+}
+# SEAT CONFIGURATION
+seat seat1 cursor move|set x y
+seat seat1 cursor press|release button1-9
+seat "name" {
+	attach 'identifier'
+	fallback true|false
+	hide_cursor 5000|when-typing enable|disable
+	idle_inhibit|idle_wake keyboard pointer touchpad touch tablet_pad tablet_tool switch
+	keyboard_grouping none|smart
+	pointer_constraint enable|disable|escape
+	shortcuts_inhibitor enable|disable|activate|deactivate|toggle
+	xcursor_theme 'Cursortheme' 32
+}
+# sway-output
+output "Some Company ABC123 0x00000000" pos 1920 0 res 1920x1080
+output * {
+	mode|resolution|res --custom 1920x1080@60.001Hz
+	modeline 0...
+	position|pos $X $Y
+	scale 1
+	scale_filter linear|nearest|smart
+	subpixel rgb|bgr|vrgb|vbgr|none
+	background|bg "$(fd . ~/Pictures/screen/|shuf -n1)" stretch|fill|fit|center|tile #666
+	background|bg #666 solid_color
+	transform 90|180|270|flipped|flipped-90|flipped-180|flipped-270|normal clockwise|anticlockwise
+	disable|enable|toggle
+	power|dpms on|off|toggle
+	max_render_time off|100
+	adaptive_sync on|off
+	render_bit_depth 8|10
+}
