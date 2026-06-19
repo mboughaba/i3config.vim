@@ -1,4 +1,4 @@
-aug i3config#ft_detect
-    au!
-    au BufNewFile,BufRead .i3.config,i3.config,*.i3config,*.i3.config,*sway/config,*.swayconfig,*.sway.config,sway.config,*sway/config set filetype=i3config
+aug filetypedetect
+    au BufNewFile,BufRead *i3/*config,*i3/*conf*,*.i3conf* setf i3config
+    au BufNewFile,BufRead */sway/*conf*,*/sway/config.d/*,*.swayconf* setf swayconfig
 aug end
